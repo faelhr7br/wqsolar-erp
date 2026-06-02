@@ -171,17 +171,17 @@ export default function FinanceiroPage() {
   };
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in text-slate-800">
       
       {/* HEADER SECTION */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-zinc-100">Fluxo de Caixa & Livro Caixa</h2>
-          <p className="text-zinc-500 text-sm mt-1">Livro de lançamentos financeiros de obras, rateios e diárias</p>
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Fluxo de Caixa & Livro Caixa</h2>
+          <p className="text-slate-500 text-sm mt-1">Livro de lançamentos financeiros de obras, rateios e diárias</p>
         </div>
         <button
           onClick={() => setIsFormOpen(true)}
-          className="premium-button-blue flex items-center gap-2 text-sm shadow-lg shadow-solar-blue/10"
+          className="premium-button-blue flex items-center gap-2 text-sm shadow-sm"
         >
           <Plus className="h-4 w-4" />
           Lançar Movimentação
@@ -192,45 +192,45 @@ export default function FinanceiroPage() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         
         {/* TOTAL ENTRADAS */}
-        <div className="glass-card rounded-xl p-5 flex items-center gap-4">
-          <div className="p-3 bg-solar-emerald/10 text-solar-emerald border border-solar-emerald/20 rounded-xl">
+        <div className="glass-card rounded-xl p-5 flex items-center gap-4 bg-white border border-slate-200 shadow-sm">
+          <div className="p-3 bg-emerald-50 text-solar-emerald border border-emerald-100 rounded-xl">
             <ArrowUpRight className="h-5 w-5" />
           </div>
           <div>
-            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Entradas Globais</span>
-            <h3 className="text-lg font-bold text-zinc-200 mt-1">{formatCurrency(totalEntradas)}</h3>
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Entradas Globais</span>
+            <h3 className="text-lg font-bold text-slate-800 mt-1">{formatCurrency(totalEntradas)}</h3>
           </div>
         </div>
 
         {/* TOTAL SAIDAS */}
-        <div className="glass-card rounded-xl p-5 flex items-center gap-4">
-          <div className="p-3 bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl">
+        <div className="glass-card rounded-xl p-5 flex items-center gap-4 bg-white border border-slate-200 shadow-sm">
+          <div className="p-3 bg-red-50 text-red-500 border border-red-100 rounded-xl">
             <ArrowDownRight className="h-5 w-5" />
           </div>
           <div>
-            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Saídas Globais</span>
-            <h3 className="text-lg font-bold text-zinc-200 mt-1">{formatCurrency(totalSaidas)}</h3>
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Saídas Globais</span>
+            <h3 className="text-lg font-bold text-slate-800 mt-1">{formatCurrency(totalSaidas)}</h3>
           </div>
         </div>
 
         {/* SALDO CAIXA */}
-        <div className="glass-card rounded-xl p-5 flex items-center gap-4">
-          <div className="p-3 bg-solar-blue/10 text-solar-blue border border-solar-blue/20 rounded-xl">
+        <div className="glass-card rounded-xl p-5 flex items-center gap-4 bg-white border border-slate-200 shadow-sm">
+          <div className="p-3 bg-sky-50 text-solar-blue border border-sky-100 rounded-xl">
             <DollarSign className="h-5 w-5" />
           </div>
           <div>
-            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Saldo em Caixa</span>
-            <h3 className="text-lg font-bold text-zinc-200 mt-1">{formatCurrency(saldoCaixa)}</h3>
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Saldo em Caixa</span>
+            <h3 className="text-lg font-bold text-slate-800 mt-1">{formatCurrency(saldoCaixa)}</h3>
           </div>
         </div>
 
       </div>
 
       {/* FILTERS PANEL */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-zinc-900/40 p-4 rounded-xl border border-zinc-800/80">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
         
         <div className="flex flex-wrap items-center gap-3">
-          <span className="text-xs font-bold text-zinc-500 uppercase flex items-center gap-1.5">
+          <span className="text-xs font-bold text-slate-400 uppercase flex items-center gap-1.5">
             <Filter className="h-3.5 w-3.5" />
             Filtrar por:
           </span>
@@ -241,7 +241,7 @@ export default function FinanceiroPage() {
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition ${
                 filterTipo === tp 
                   ? 'bg-solar-blue border-solar-blue text-white font-bold' 
-                  : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800'
+                  : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
               }`}
             >
               {tp === 'ALL' ? 'Todos' : tp === 'ENTRADA' ? 'Entradas' : 'Saídas'}
@@ -249,14 +249,14 @@ export default function FinanceiroPage() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3 bg-zinc-950 px-3 py-1.5 rounded-lg border border-zinc-805 max-w-xs w-full">
-          <Search className="h-4 w-4 text-zinc-500" />
+        <div className="flex items-center gap-3 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 max-w-xs w-full">
+          <Search className="h-4 w-4 text-slate-400" />
           <input
             type="text"
             placeholder="Buscar por obra..."
             value={searchObra}
             onChange={(e) => setSearchObra(e.target.value)}
-            className="w-full bg-transparent border-0 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:ring-0"
+            className="w-full bg-transparent border-0 text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-0"
           />
         </div>
 
@@ -268,17 +268,17 @@ export default function FinanceiroPage() {
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-blue border-t-transparent"></div>
         </div>
       ) : filteredLedger.length === 0 ? (
-        <div className="glass-panel rounded-2xl p-12 text-center text-zinc-500 border-zinc-850">
-          <BookOpen className="h-10 w-10 text-zinc-600 mx-auto mb-4" />
-          <p className="text-sm font-semibold">Nenhuma movimentação registrada.</p>
-          <p className="text-xs text-zinc-650 mt-1">Registre despesas de Uber, Material ou Alimentação para as obras.</p>
+        <div className="glass-panel rounded-2xl p-12 text-center text-slate-500 bg-white border border-slate-200 shadow-sm">
+          <BookOpen className="h-10 w-10 text-slate-400 mx-auto mb-4" />
+          <p className="text-sm font-semibold text-slate-700">Nenhuma movimentação registrada.</p>
+          <p className="text-xs text-slate-400 mt-1">Registre despesas de Uber, Material ou Alimentação para as obras.</p>
         </div>
       ) : (
-        <div className="glass-panel rounded-2xl overflow-hidden border border-zinc-850">
+        <div className="glass-panel rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-zinc-850 bg-zinc-900/30 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
+                <tr className="border-b border-slate-200 bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                   <th className="px-6 py-4">Data</th>
                   <th className="px-6 py-4">Obra</th>
                   <th className="px-6 py-4">Categoria</th>
@@ -288,42 +288,42 @@ export default function FinanceiroPage() {
                   <th className="px-6 py-4 text-center">Ações</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-850/60 text-xs">
+              <tbody className="divide-y divide-slate-100 text-xs">
                 {filteredLedger.map((mov) => {
                   const isEntrada = mov.tipo === 'ENTRADA';
                   
                   return (
-                    <tr key={mov.id} className="hover:bg-zinc-900/30 transition">
-                      <td className="px-6 py-4 font-medium text-zinc-400">
+                    <tr key={mov.id} className="hover:bg-slate-50/50 transition">
+                      <td className="px-6 py-4 font-medium text-slate-500">
                         {new Date(mov.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
                       </td>
-                      <td className="px-6 py-4 font-bold text-zinc-200">
+                      <td className="px-6 py-4 font-bold text-slate-800">
                         {mov.obra.nome}
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2 py-0.5 rounded font-semibold text-[10px] uppercase border ${
                           isEntrada 
-                            ? 'bg-solar-emerald/10 border-solar-emerald/20 text-solar-emerald' 
-                            : 'bg-red-500/10 border-red-500/20 text-red-400'
+                            ? 'bg-emerald-50 border-emerald-100 text-solar-emerald' 
+                            : 'bg-red-50 border-red-100 text-red-500'
                         }`}>
                           {isEntrada ? mov.categoriaEntrada : mov.categoriaSaida}
                         </span>
                       </td>
-                      <td className={`px-6 py-4 font-bold ${isEntrada ? 'text-solar-emerald' : 'text-zinc-200'}`}>
+                      <td className={`px-6 py-4 font-bold ${isEntrada ? 'text-solar-emerald' : 'text-slate-800'}`}>
                         {isEntrada ? '+' : '-'} {formatCurrency(mov.valor)}
                       </td>
-                      <td className="px-6 py-4 text-zinc-400">
+                      <td className="px-6 py-4 text-slate-500">
                         {mov.socio 
                           ? `Sócio (${mov.socio.user.nome})` 
                           : 'Caixa da Empresa'}
                       </td>
-                      <td className="px-6 py-4 text-zinc-400 max-w-[200px] truncate">
+                      <td className="px-6 py-4 text-slate-500 max-w-[200px] truncate">
                         {mov.descricao || (mov.funcionario ? `Pago a ${mov.funcionario.nome}` : '-')}
                       </td>
                       <td className="px-6 py-4 text-center">
                         <button
                           onClick={() => handleDeleteTransaction(mov.id)}
-                          className="p-1.5 bg-red-500/5 hover:bg-red-500/10 border border-transparent hover:border-red-500/10 text-red-400 rounded-lg transition"
+                          className="p-1.5 bg-red-50/5 hover:bg-red-50/10 border border-transparent hover:border-red-100 text-red-500 rounded-lg transition"
                           title="Excluir Lançamento"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
@@ -341,12 +341,12 @@ export default function FinanceiroPage() {
       {/* CREATE TRANSACTION DIALOG/DRAWER */}
       {isFormOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsFormOpen(false)} />
-          <div className="glass-panel w-full max-w-lg rounded-2xl p-8 relative z-10 mx-4">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-xs" onClick={() => setIsFormOpen(false)} />
+          <div className="glass-panel w-full max-w-lg rounded-2xl p-8 relative z-10 mx-4 bg-white border border-slate-200 shadow-xl">
             
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-bold text-zinc-100">Lançar Movimentação Financeira</h3>
-              <button onClick={() => setIsFormOpen(false)} className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-500">
+              <h3 className="text-lg font-bold text-slate-900">Lançar Movimentação Financeira</h3>
+              <button onClick={() => setIsFormOpen(false)} className="p-1 rounded-lg hover:bg-slate-100 text-slate-400">
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -360,8 +360,8 @@ export default function FinanceiroPage() {
                   onClick={() => setTipo('SAIDA')}
                   className={`py-2 rounded-lg text-xs font-bold border transition ${
                     tipo === 'SAIDA' 
-                      ? 'bg-red-500/10 border-red-500/30 text-red-400' 
-                      : 'bg-zinc-900 border-zinc-800 text-zinc-400'
+                      ? 'bg-red-50 border-red-200 text-red-500' 
+                      : 'bg-slate-50 border-slate-100 text-slate-500 hover:bg-slate-100'
                   }`}
                 >
                   Saída / Despesa
@@ -371,8 +371,8 @@ export default function FinanceiroPage() {
                   onClick={() => setTipo('ENTRADA')}
                   className={`py-2 rounded-lg text-xs font-bold border transition ${
                     tipo === 'ENTRADA' 
-                      ? 'bg-solar-emerald/10 border-solar-emerald/30 text-solar-emerald' 
-                      : 'bg-zinc-900 border-zinc-800 text-zinc-400'
+                      ? 'bg-emerald-50 border-emerald-200 text-solar-emerald' 
+                      : 'bg-slate-50 border-slate-100 text-slate-500 hover:bg-slate-100'
                   }`}
                 >
                   Entrada / Recebimento
@@ -382,23 +382,23 @@ export default function FinanceiroPage() {
               {/* VALUE & DATE */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Valor (R$)</label>
+                  <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Valor (R$)</label>
                   <input
                     type="number"
                     required
                     value={valor}
                     onChange={(e) => setValor(e.target.value)}
                     placeholder="150"
-                    className="premium-input text-xs"
+                    className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Data do Lançamento</label>
+                  <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Data do Lançamento</label>
                   <input
                     type="date"
                     value={data}
                     onChange={(e) => setData(e.target.value)}
-                    className="premium-input text-xs"
+                    className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                   />
                 </div>
               </div>
@@ -406,12 +406,12 @@ export default function FinanceiroPage() {
               {/* DYNAMIC CATEGORY AND OBRA */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Obra Associada</label>
+                  <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Obra Associada</label>
                   <select
                     required
                     value={obraId}
                     onChange={(e) => setObraId(e.target.value)}
-                    className="premium-input text-xs"
+                    className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                   >
                     <option value="">Selecione...</option>
                     {obras.map(o => (
@@ -421,12 +421,12 @@ export default function FinanceiroPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Categoria</label>
+                  <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Categoria</label>
                   {tipo === 'ENTRADA' ? (
                     <select
                       value={categoriaEntrada}
                       onChange={(e) => setCategoriaEntrada(e.target.value)}
-                      className="premium-input text-xs"
+                      className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                     >
                       <option value="SINAL">Sinal</option>
                       <option value="PARCIAL">Parcial</option>
@@ -436,7 +436,7 @@ export default function FinanceiroPage() {
                     <select
                       value={categoriaSaida}
                       onChange={(e) => setCategoriaSaida(e.target.value)}
-                      className="premium-input text-xs"
+                      className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                     >
                       <option value="UBER">Uber</option>
                       <option value="DIARIA">Diária</option>
@@ -454,11 +454,11 @@ export default function FinanceiroPage() {
               {/* WHO PAID (WATERFALL TRIGGER) */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Quem Pagou? (Origem)</label>
+                  <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Quem Pagou? (Origem)</label>
                   <select
                     value={socioId}
                     onChange={(e) => setSocioId(e.target.value)}
-                    className="premium-input text-xs"
+                    className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                   >
                     <option value="">Caixa da Empresa (Empresa)</option>
                     {partners.map(p => (
@@ -470,11 +470,11 @@ export default function FinanceiroPage() {
                 {/* EMPLOYEE SELECT IF CATEGORY DIARIA */}
                 {tipo === 'SAIDA' && categoriaSaida === 'DIARIA' && (
                   <div>
-                    <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Vincular Funcionário</label>
+                    <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Vincular Funcionário</label>
                     <select
                       value={funcionarioId}
                       onChange={(e) => setFuncionarioId(e.target.value)}
-                      className="premium-input text-xs"
+                      className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                     >
                       <option value="">Nenhum...</option>
                       {workers.map(w => (
@@ -487,17 +487,17 @@ export default function FinanceiroPage() {
 
               {/* DESCRIPTION */}
               <div>
-                <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Descrição / Observações</label>
+                <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Descrição / Observações</label>
                 <textarea
                   value={descricao}
                   onChange={(e) => setDescricao(e.target.value)}
                   placeholder="Ex: Uber ida até o galpão para buscar painéis..."
                   rows={2}
-                  className="premium-input text-xs"
+                  className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                 />
               </div>
 
-              <button type="submit" className="premium-button-blue w-full py-2.5 font-bold mt-2">
+              <button type="submit" className="premium-button-blue w-full py-2.5 font-bold mt-2 shadow-sm">
                 Efetuar Lançamento
               </button>
             </form>

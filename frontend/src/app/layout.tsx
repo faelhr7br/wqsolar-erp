@@ -13,7 +13,8 @@ import {
   Menu, 
   X,
   User,
-  Wrench
+  Wrench,
+  Target
 } from 'lucide-react';
 import './globals.css';
 
@@ -50,7 +51,7 @@ export default function RootLayout({
 
   if (!mounted) {
     return (
-      <html lang="pt-BR" className="dark">
+      <html lang="pt-BR" className="light">
         <head>
           <title>WQ Solar - ERP</title>
           <meta name="description" content="Gestão Solar Operacional e Financeira Premium" />
@@ -70,7 +71,7 @@ export default function RootLayout({
   // If on login, do not wrap in Sidebar layout
   if (pathname === '/login') {
     return (
-      <html lang="pt-BR" className="dark">
+      <html lang="pt-BR" className="light">
         <head>
           <title>WQ Solar - Login</title>
           <meta name="description" content="Gestão Solar Operacional e Financeira Premium" />
@@ -83,6 +84,7 @@ export default function RootLayout({
 
   const menuItems = [
     { name: 'Dashboard', path: '/', icon: LayoutDashboard },
+    { name: 'CRM Funil', path: '/crm', icon: Target },
     { name: 'Obras', path: '/obras', icon: HardHat },
     { name: 'Financeiro', path: '/financeiro', icon: DollarSign },
     { name: 'Sócios', path: '/socios', icon: Users },
@@ -91,7 +93,7 @@ export default function RootLayout({
   ];
 
   return (
-    <html lang="pt-BR" className="dark">
+    <html lang="pt-BR" className="light">
       <head>
         <title>WQ Solar - ERP</title>
         <meta name="description" content="Gestão Solar Operacional e Financeira Premium" />
@@ -101,7 +103,7 @@ export default function RootLayout({
         <div className="flex min-h-screen bg-background">
           
           {/* DESKTOP SIDEBAR */}
-          <aside className="hidden md:flex flex-col w-64 border-r border-card-border bg-[#09090b] p-6 justify-between shrink-0">
+          <aside className="hidden md:flex flex-col w-64 border-r border-slate-800 bg-[#0b0f19] p-6 justify-between shrink-0">
             <div className="space-y-8">
               {/* Brand Header */}
               <div className="flex items-center gap-3 px-2">
@@ -231,24 +233,24 @@ export default function RootLayout({
           )}
 
           {/* MAIN PAGE SHELL CONTENT */}
-          <div className="flex flex-col flex-1 min-w-0 bg-[#09090b]">
+          <div className="flex flex-col flex-1 min-w-0 bg-background text-slate-800">
             
             {/* MOBILE HEADER BAR */}
-            <header className="flex md:hidden items-center justify-between px-6 py-4 border-b border-card-border bg-[#09090b]/80 backdrop-blur sticky top-0 z-40">
+            <header className="flex md:hidden items-center justify-between px-6 py-4 border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-40">
               <div className="flex items-center gap-2">
                 <Sun className="h-5 w-5 text-solar-blue animate-pulse" />
-                <span className="font-bold text-sm text-zinc-200 tracking-tight">WQ Solar</span>
+                <span className="font-bold text-sm text-slate-800 tracking-tight">WQ Solar</span>
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="p-1.5 rounded-lg border border-zinc-800 text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200"
+                className="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-100 hover:text-slate-700"
               >
                 <Menu className="h-5 w-5" />
               </button>
             </header>
 
             {/* DYNAMIC SCROLL CONTAINER */}
-            <main className="flex-1 overflow-y-auto px-6 py-8 md:p-10 max-w-7xl w-full mx-auto">
+            <main className="flex-1 overflow-y-auto px-6 py-8 md:p-10 max-w-7xl w-full mx-auto text-slate-800">
               {children}
             </main>
           </div>

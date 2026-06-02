@@ -60,7 +60,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer seu-jwt-token-aqui-se-necessario"
+              "value": "Bearer wqsolar-erp-master-api-key-2026"
             }
           ]
         },
@@ -69,7 +69,7 @@
         "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"cliente\": \"{{ $parameter.cliente || $parameter.nome }}\",\n  \"valorFechado\": {{ $parameter.valorFechado }}\n}",
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.toolHttp",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
       "typeVersion": 1.1,
       "position": [440, 420],
       "id": "tool-obras",
@@ -82,12 +82,20 @@
         "method": "POST",
         "url": "https://api-solar.wqsolar.site/api/financeiro/transaction",
         "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer wqsolar-erp-master-api-key-2026"
+            }
+          ]
+        },
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "{\n  \"valor\": {{ $parameter.valor }},\n  \"tipo\": \"{{ $parameter.tipo }}\",\n  \"categoriaSaida\": \"{{ $parameter.categoria || 'OUTROS' }}\",\n  \"descricao\": \"{{ $parameter.descricao }}\",\n  \"obraId\": \"{{ $parameter.obraId }}\",\n  \"socioId\": \"{{ $parameter.socioId || null }}\"\n}",
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.toolHttp",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
       "typeVersion": 1.1,
       "position": [560, 420],
       "id": "tool-finance",
@@ -100,9 +108,17 @@
         "method": "GET",
         "url": "https://api-solar.wqsolar.site/api/obras",
         "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer wqsolar-erp-master-api-key-2026"
+            }
+          ]
+        },
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.toolHttp",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
       "typeVersion": 1.1,
       "position": [680, 420],
       "id": "tool-summary",
@@ -131,6 +147,156 @@
       "position": [480, 200],
       "id": "reply-to-wa",
       "name": "Responder no Grupo"
+    },
+    {
+      "parameters": {
+        "name": "listar_instaladores",
+        "description": "Retorna a lista de instaladores de campo (colaboradores) cadastrados, suas diárias padrão, dias de serviço e pagamentos.",
+        "method": "GET",
+        "url": "https://api-solar.wqsolar.site/api/obras/funcionarios?includeInactive=true",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer wqsolar-erp-master-api-key-2026"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [800, 420],
+      "id": "tool-list-workers",
+      "name": "Listar Instaladores"
+    },
+    {
+      "parameters": {
+        "name": "cadastrar_instalador",
+        "description": "Cadastra um novo colaborador/instalador de campo. Argumentos: nome, telefone, valorDiariaPadrao (número).",
+        "method": "POST",
+        "url": "https://api-solar.wqsolar.site/api/obras/funcionarios",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer wqsolar-erp-master-api-key-2026"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"telefone\": \"{{ $parameter.telefone || null }}\",\n  \"valorDiariaPadrao\": {{ $parameter.valorDiariaPadrao }}\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [920, 420],
+      "id": "tool-create-worker",
+      "name": "Cadastrar Instalador"
+    },
+    {
+      "parameters": {
+        "name": "agendar_calendario",
+        "description": "Registra a presença da equipe de instaladores em uma determinada obra na data indicada. Argumentos: obraId, data (data formatada ISO 8601 YYYY-MM-DD), funcionarioIds (array de IDs dos instaladores).",
+        "method": "POST",
+        "url": "https://api-solar.wqsolar.site/api/obras/{{ $parameter.obraId }}/calendario",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer wqsolar-erp-master-api-key-2026"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"data\": \"{{ $parameter.data }}\",\n  \"funcionarioIds\": {{ $parameter.funcionarioIds }}\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [1040, 420],
+      "id": "tool-schedule-calendar",
+      "name": "Agendar Calendário"
+    },
+    {
+      "parameters": {
+        "name": "consultar_leads",
+        "description": "Busca todos os leads cadastrados no funil de vendas do CRM.",
+        "method": "GET",
+        "url": "https://api-solar.wqsolar.site/api/crm/leads",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer wqsolar-erp-master-api-key-2026"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [1160, 420],
+      "id": "tool-list-leads",
+      "name": "Consultar Leads CRM"
+    },
+    {
+      "parameters": {
+        "name": "criar_lead_crm",
+        "description": "Cria um novo lead de prospecção de cliente no funil de vendas. Argumentos: nome (projeto), cliente (nome da pessoa), telefone (opcional), valorProposta (opcional, número), status (opcional: NOVO_LEAD, VISITA_TECNICA, PROPOSTA_ENVIADA, NEGOCIACAO, CONTRATO_FECHADO, PERDIDO).",
+        "method": "POST",
+        "url": "https://api-solar.wqsolar.site/api/crm/leads",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer wqsolar-erp-master-api-key-2026"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"cliente\": \"{{ $parameter.cliente }}\",\n  \"telefone\": \"{{ $parameter.telefone || null }}\",\n  \"valorProposta\": {{ $parameter.valorProposta || 0 }},\n  \"status\": \"{{ $parameter.status || 'NOVO_LEAD' }}\"\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [1280, 420],
+      "id": "tool-create-lead",
+      "name": "Criar Lead CRM"
+    },
+    {
+      "parameters": {
+        "name": "converter_lead_em_obra",
+        "description": "Converte um lead do CRM em uma obra ativa no ERP. Argumentos: leadId (ID do lead), valorFechado (número).",
+        "method": "POST",
+        "url": "https://api-solar.wqsolar.site/api/crm/leads/{{ $parameter.leadId }}/convert",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer wqsolar-erp-master-api-key-2026"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"valorFechado\": {{ $parameter.valorFechado }}\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [1400, 420],
+      "id": "tool-convert-lead",
+      "name": "Converter Lead"
     }
   ],
   "connections": {
@@ -201,6 +367,72 @@
       ]
     },
     "Consultar Obras": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Listar Instaladores": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cadastrar Instalador": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agendar Calendário": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar Leads CRM": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Lead CRM": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Converter Lead": {
       "ai_tool": [
         [
           {

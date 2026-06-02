@@ -9,19 +9,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#09090b', // coal black background
-        foreground: '#f4f4f5', // off-white text
+        background: '#f8fafc', // Clean slate-50 light background
+        foreground: '#0f172a', // Dark slate-900 for high-contrast readable text
         card: {
-          DEFAULT: '#121214', // matte grey card
-          border: '#27272a', // zinc-800 borders
-          hover: '#1e1e24'
+          DEFAULT: '#ffffff', // Clean white cards
+          border: '#e2e8f0', // Slate-200 elegant borders
+          hover: '#f1f5f9'  // Slate-100 hover effect
         },
         solar: {
           yellow: '#f59e0b',
           blue: '#0284c7', // Slate blue
           emerald: '#10b981', // Flat emerald green
-          steel: '#38bdf8', // Cool steel accent
-          slate: '#475569'
+          steel: '#0284c7', // Slate blue primary
+          slate: '#64748b'  // Slate-500 text
         }
       },
       fontFamily: {

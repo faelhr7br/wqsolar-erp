@@ -267,15 +267,15 @@ export default function ObrasPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'EM_ANDAMENTO':
-        return 'bg-solar-blue/10 text-solar-steel border border-solar-blue/20';
+        return 'bg-sky-50 text-solar-blue border border-sky-100';
       case 'FINALIZADA':
-        return 'bg-solar-emerald/10 text-solar-emerald border border-solar-emerald/20';
+        return 'bg-emerald-50 text-solar-emerald border border-emerald-100';
       case 'PENDENTE_RECEBIMENTO':
-        return 'bg-solar-yellow/10 text-solar-yellow border border-solar-yellow/20';
+        return 'bg-amber-50 text-amber-700 border border-amber-100';
       case 'CANCELADA':
-        return 'bg-red-500/10 text-red-400 border border-red-500/20';
+        return 'bg-red-50 text-red-500 border border-red-100';
       default:
-        return 'bg-zinc-800 text-zinc-400';
+        return 'bg-slate-100 text-slate-500 border border-slate-200';
     }
   };
 
@@ -284,17 +284,17 @@ export default function ObrasPage() {
   };
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in text-slate-800">
       
       {/* HEADER SECTION */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-zinc-100">Obras & Operações</h2>
-          <p className="text-zinc-500 text-sm mt-1">Status de instalações solares e custos reais de campo</p>
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Obras & Operações</h2>
+          <p className="text-slate-500 text-sm mt-1">Status de instalações solares e custos reais de campo</p>
         </div>
         <button
           onClick={() => setIsCreateOpen(true)}
-          className="premium-button-blue flex items-center gap-2 text-sm shadow-lg shadow-solar-blue/10"
+          className="premium-button-blue flex items-center gap-2 text-sm shadow-sm"
         >
           <Plus className="h-4 w-4" />
           Nova Obra
@@ -302,14 +302,14 @@ export default function ObrasPage() {
       </div>
 
       {/* SEARCH AND FILTERS */}
-      <div className="flex items-center gap-3 bg-zinc-900/60 p-1.5 rounded-xl border border-zinc-800/80 max-w-md">
-        <Search className="h-4 w-4 text-zinc-500 ml-3" />
+      <div className="flex items-center gap-3 bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm max-w-md">
+        <Search className="h-4 w-4 text-slate-400 ml-3" />
         <input
           type="text"
           placeholder="Buscar obra pelo nome ou cliente..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-transparent border-0 text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:ring-0"
+          className="w-full bg-transparent border-0 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-0"
         />
       </div>
 
@@ -319,56 +319,56 @@ export default function ObrasPage() {
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-blue border-t-transparent"></div>
         </div>
       ) : filteredObras.length === 0 ? (
-        <div className="glass-panel rounded-2xl p-12 text-center text-zinc-500">
-          <HardHat className="h-10 w-10 text-zinc-600 mx-auto mb-4" />
-          <p className="text-sm font-semibold">Nenhuma obra cadastrada ou encontrada.</p>
-          <p className="text-xs text-zinc-600 mt-1">Cadastre via sistema ou envie "Nova obra João valor 34000" no WhatsApp.</p>
+        <div className="glass-panel rounded-2xl p-12 text-center text-slate-500 bg-white border border-slate-200 shadow-sm">
+          <HardHat className="h-10 w-10 text-slate-400 mx-auto mb-4" />
+          <p className="text-sm font-semibold text-slate-700">Nenhuma obra cadastrada ou encontrada.</p>
+          <p className="text-xs text-slate-400 mt-1">Cadastre via sistema ou envie "Nova obra João valor 34000" no WhatsApp.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredObras.map((obra) => (
-            <div key={obra.obraId} className="glass-card rounded-2xl p-6 flex flex-col justify-between">
+            <div key={obra.obraId} className="glass-card rounded-2xl p-6 flex flex-col justify-between bg-white border border-slate-200 shadow-sm">
               <div>
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <span className={`text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-full uppercase ${getStatusColor(obra.status)}`}>
                     {obra.status.replace('_', ' ')}
                   </span>
-                  <span className="text-xs font-semibold text-zinc-500">{obra.diasTrabalhados} dias em campo</span>
+                  <span className="text-xs font-semibold text-slate-500">{obra.diasTrabalhados} dias em campo</span>
                 </div>
 
-                <h3 className="text-lg font-bold text-zinc-100 tracking-tight">{obra.obraNome}</h3>
-                <p className="text-xs text-zinc-400 mt-1">Cliente: {obra.cliente}</p>
+                <h3 className="text-lg font-bold text-slate-900 tracking-tight">{obra.obraNome}</h3>
+                <p className="text-xs text-slate-500 mt-1">Cliente: {obra.cliente}</p>
 
                 {/* Micro operational ledger */}
                 <div className="mt-5 space-y-2.5">
                   <div className="flex justify-between text-xs">
-                    <span className="text-zinc-500">Valor Fechado:</span>
-                    <span className="font-semibold text-zinc-300">{formatCurrency(obra.valorFechado)}</span>
+                    <span className="text-slate-500 font-medium">Valor Fechado:</span>
+                    <span className="font-semibold text-slate-700">{formatCurrency(obra.valorFechado)}</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-zinc-500">Faturado:</span>
+                    <span className="text-slate-500 font-medium">Faturado:</span>
                     <span className="font-semibold text-solar-blue">{formatCurrency(obra.totalEntradas)}</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-zinc-500">Custo Total:</span>
-                    <span className="font-semibold text-red-400">{formatCurrency(obra.totalSaidas)}</span>
+                    <span className="text-slate-500 font-medium">Custo Total:</span>
+                    <span className="font-semibold text-red-500">{formatCurrency(obra.totalSaidas)}</span>
                   </div>
-                  <div className="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden mt-3">
+                  <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-3">
                     <div 
                       className="bg-solar-emerald h-full"
                       style={{ width: `${Math.min(100, (obra.totalEntradas > 0 ? (obra.lucroLiquido / obra.totalEntradas) * 100 : 0))}%` }}
                     ></div>
                   </div>
-                  <div className="flex justify-between text-[10px] font-bold text-zinc-500 mt-1">
+                  <div className="flex justify-between text-[10px] font-bold text-slate-400 mt-1">
                     <span>LUCRO LÍQUIDO PARCIAL</span>
-                    <span className={obra.lucroLiquido >= 0 ? 'text-solar-emerald' : 'text-red-400'}>
+                    <span className={`font-bold ${obra.lucroLiquido >= 0 ? 'text-solar-emerald' : 'text-red-500'}`}>
                       {formatCurrency(obra.lucroLiquido)}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-card-border/80 flex gap-2">
+              <div className="mt-6 pt-4 border-t border-slate-100 flex gap-2">
                 <button
                   onClick={() => openDetails(obra)}
                   className="premium-button-zinc flex-1 flex items-center justify-center gap-1.5 py-1.5 text-xs font-semibold"
@@ -385,64 +385,64 @@ export default function ObrasPage() {
       {/* CREATE WORK DRAWER/MODAL */}
       {isCreateOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsCreateOpen(false)} />
-          <div className="glass-panel w-full max-w-md rounded-2xl p-8 relative z-10 mx-4">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-xs" onClick={() => setIsCreateOpen(false)} />
+          <div className="glass-panel w-full max-w-md rounded-2xl p-8 relative z-10 mx-4 bg-white border border-slate-200 shadow-xl">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-bold text-zinc-100">Criar Nova Obra</h3>
-              <button onClick={() => setIsCreateOpen(false)} className="p-1 rounded-lg hover:bg-zinc-800 text-zinc-500">
+              <h3 className="text-lg font-bold text-slate-900 font-bold">Criar Nova Obra</h3>
+              <button onClick={() => setIsCreateOpen(false)} className="p-1 rounded-lg hover:bg-slate-100 text-slate-400">
                 <X className="h-4 w-4" />
               </button>
             </div>
 
             <form onSubmit={handleCreate} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-500 mb-1.5 uppercase">Nome da Obra</label>
+                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Nome da Obra</label>
                 <input
                   type="text"
                   required
                   value={nome}
                   onChange={(e) => setNome(e.target.value)}
                   placeholder="Ex: João Solar"
-                  className="premium-input text-sm"
+                  className="premium-input text-sm bg-white border border-slate-200 text-slate-800"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-500 mb-1.5 uppercase">Cliente</label>
+                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Cliente</label>
                 <input
                   type="text"
                   required
                   value={cliente}
                   onChange={(e) => setCliente(e.target.value)}
                   placeholder="Ex: João da Silva"
-                  className="premium-input text-sm"
+                  className="premium-input text-sm bg-white border border-slate-200 text-slate-800"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-500 mb-1.5 uppercase">Valor Fechado (R$)</label>
+                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Valor Fechado (R$)</label>
                 <input
                   type="number"
                   required
                   value={valorFechado}
                   onChange={(e) => setValorFechado(e.target.value)}
                   placeholder="34000"
-                  className="premium-input text-sm"
+                  className="premium-input text-sm bg-white border border-slate-200 text-slate-800"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-500 mb-1.5 uppercase">Observações</label>
+                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Observações</label>
                 <textarea
                   value={observacoes}
                   onChange={(e) => setObservacoes(e.target.value)}
                   placeholder="Especificações de painéis e inversores..."
                   rows={3}
-                  className="premium-input text-sm"
+                  className="premium-input text-sm bg-white border border-slate-200 text-slate-800"
                 />
               </div>
 
-              <button type="submit" className="premium-button-blue w-full py-2.5 font-bold mt-2">
+              <button type="submit" className="premium-button-blue w-full py-2.5 font-bold mt-2 shadow-sm">
                 Criar Obra
               </button>
             </form>
@@ -453,8 +453,8 @@ export default function ObrasPage() {
       {/* DETAILED PROJECT PERFORMANCE MODAL */}
       {selectedObra && (
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
-          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setSelectedObra(null)} />
-          <div className="glass-panel w-full max-w-4xl rounded-2xl p-6 md:p-8 relative z-10 mx-4 my-8 max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-xs" onClick={() => setSelectedObra(null)} />
+          <div className="glass-panel w-full max-w-4xl rounded-2xl p-6 md:p-8 relative z-10 mx-4 my-8 max-h-[90vh] overflow-y-auto bg-white border border-slate-200 shadow-2xl">
             
             {/* Modal Header */}
             <div className="flex justify-between items-start gap-4 mb-6">
@@ -462,34 +462,34 @@ export default function ObrasPage() {
                 <span className={`text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-full uppercase ${getStatusColor(selectedObra.status)}`}>
                   {selectedObra.status.replace('_', ' ')}
                 </span>
-                <h3 className="text-xl md:text-2xl font-bold text-zinc-100 tracking-tight mt-2">{selectedObra.obraNome}</h3>
-                <p className="text-xs text-zinc-500">Controle analítico de receitas, sócios e calendário</p>
+                <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight mt-2">{selectedObra.obraNome}</h3>
+                <p className="text-xs text-slate-400">Controle analítico de receitas, sócios e calendário</p>
               </div>
               <div className="flex items-center gap-2">
                 <button 
                   onClick={() => handleDeleteObra(selectedObra.obraId)}
-                  className="p-2 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg hover:bg-red-500/20 transition"
+                  className="p-2 bg-red-50 border border-red-100 text-red-500 rounded-lg hover:bg-red-100 transition"
                   title="Deletar Obra"
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
-                <button onClick={() => setSelectedObra(null)} className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg hover:bg-zinc-800 text-zinc-400">
+                <button onClick={() => setSelectedObra(null)} className="p-2 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 text-slate-400">
                   <X className="h-4 w-4" />
                 </button>
               </div>
             </div>
 
             {/* Quick Status Control */}
-            <div className="bg-zinc-900/60 p-4 rounded-xl border border-zinc-800/80 mb-6 flex flex-wrap items-center gap-3 text-xs">
-              <span className="text-zinc-500 font-bold uppercase tracking-wider">Alterar Status:</span>
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6 flex flex-wrap items-center gap-3 text-xs shadow-sm">
+              <span className="text-slate-500 font-bold uppercase tracking-wider">Alterar Status:</span>
               {['EM_ANDAMENTO', 'FINALIZADA', 'PENDENTE_RECEBIMENTO', 'CANCELADA'].map((st) => (
                 <button
                   key={st}
                   onClick={() => handleStatusChange(st)}
                   className={`px-3 py-1.5 rounded-lg font-semibold transition ${
                     selectedObra.status === st 
-                      ? 'bg-solar-blue text-white shadow' 
-                      : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                      ? 'bg-solar-blue text-white shadow-sm' 
+                      : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
                   }`}
                 >
                   {st.replace('_', ' ')}
@@ -501,23 +501,23 @@ export default function ObrasPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               
               {/* Box 1: Money values */}
-              <div className="bg-zinc-900/30 p-5 rounded-xl border border-zinc-800/80 space-y-3">
-                <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Métricas Financeiras</h4>
+              <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3 shadow-sm">
+                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider font-bold">Métricas Financeiras</h4>
                 <div className="space-y-1.5 text-xs">
-                  <div className="flex justify-between"><span className="text-zinc-500">Contratado:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.valorFechado)}</span></div>
-                  <div className="flex justify-between"><span className="text-zinc-500">Entradas (Faturamento):</span><span className="font-semibold text-solar-blue">{formatCurrency(selectedObra.totalEntradas)}</span></div>
-                  <div className="flex justify-between"><span className="text-zinc-500">Custos Totais:</span><span className="font-semibold text-red-400">{formatCurrency(selectedObra.totalSaidas)}</span></div>
-                  <div className="border-t border-zinc-850 pt-2 flex justify-between font-bold"><span className="text-zinc-400">LUCRO LÍQUIDO:</span><span className={selectedObra.lucroLiquido >= 0 ? 'text-solar-emerald' : 'text-red-400'}>{formatCurrency(selectedObra.lucroLiquido)}</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500 font-medium">Contratado:</span><span className="font-semibold text-slate-700">{formatCurrency(selectedObra.valorFechado)}</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500 font-medium">Entradas (Faturamento):</span><span className="font-semibold text-solar-blue">{formatCurrency(selectedObra.totalEntradas)}</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500 font-medium">Custos Totais:</span><span className="font-semibold text-red-500">{formatCurrency(selectedObra.totalSaidas)}</span></div>
+                  <div className="border-t border-slate-200 pt-2 flex justify-between font-bold"><span className="text-slate-500">LUCRO LÍQUIDO:</span><span className={selectedObra.lucroLiquido >= 0 ? 'text-solar-emerald' : 'text-red-500'}>{formatCurrency(selectedObra.lucroLiquido)}</span></div>
                 </div>
               </div>
 
               {/* Box 2: Sócio Refund Rafael */}
-              <div className="bg-zinc-900/30 p-5 rounded-xl border border-zinc-800/80 space-y-3">
-                <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Reembolso Rafael</h4>
+              <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3 shadow-sm">
+                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider font-bold">Reembolso Rafael</h4>
                 <div className="space-y-1.5 text-xs">
-                  <div className="flex justify-between"><span className="text-zinc-500">Pago do Bolso:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.gastoSocioRafael)}</span></div>
-                  <div className="flex justify-between"><span className="text-zinc-500">Reembolsado:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.reembolsadoRafael)}</span></div>
-                  <div className="border-t border-zinc-850 pt-2 flex justify-between font-bold text-solar-blue">
+                  <div className="flex justify-between"><span className="text-slate-500 font-medium">Pago do Bolso:</span><span className="font-semibold text-slate-700">{formatCurrency(selectedObra.gastoSocioRafael)}</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500 font-medium">Reembolsado:</span><span className="font-semibold text-slate-700">{formatCurrency(selectedObra.reembolsadoRafael)}</span></div>
+                  <div className="border-t border-slate-200 pt-2 flex justify-between font-bold text-solar-blue">
                     <span>A REEMBOLSAR:</span>
                     <span>{formatCurrency(selectedObra.reembolsoPendenteRafael)}</span>
                   </div>
@@ -525,12 +525,12 @@ export default function ObrasPage() {
               </div>
 
               {/* Box 3: Sócio Refund Wilson */}
-              <div className="bg-zinc-900/30 p-5 rounded-xl border border-zinc-800/80 space-y-3">
-                <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Reembolso Wilson</h4>
+              <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3 shadow-sm">
+                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider font-bold">Reembolso Wilson</h4>
                 <div className="space-y-1.5 text-xs">
-                  <div className="flex justify-between"><span className="text-zinc-500">Pago do Bolso:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.gastoSocioWilson)}</span></div>
-                  <div className="flex justify-between"><span className="text-zinc-500">Reembolsado:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.reembolsadoWilson)}</span></div>
-                  <div className="border-t border-zinc-850 pt-2 flex justify-between font-bold text-zinc-400">
+                  <div className="flex justify-between"><span className="text-slate-500 font-medium">Pago do Bolso:</span><span className="font-semibold text-slate-700">{formatCurrency(selectedObra.gastoSocioWilson)}</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500 font-medium">Reembolsado:</span><span className="font-semibold text-slate-700">{formatCurrency(selectedObra.reembolsadoWilson)}</span></div>
+                  <div className="border-t border-slate-200 pt-2 flex justify-between font-bold text-slate-500">
                     <span>A REEMBOLSAR:</span>
                     <span>{formatCurrency(selectedObra.reembolsoPendenteWilson)}</span>
                   </div>
@@ -543,19 +543,19 @@ export default function ObrasPage() {
               
               {/* COLUMN A: REEMBOLSO EXECUTION FORM */}
               <div className="space-y-6">
-                <div className="bg-[#121214] p-5 rounded-xl border border-zinc-800">
-                  <h4 className="font-bold text-sm text-zinc-200 mb-4 flex items-center gap-2">
+                <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                  <h4 className="font-bold text-sm text-slate-700 mb-4 flex items-center gap-2">
                     <DollarSign className="h-4 w-4 text-solar-emerald" />
                     Pagar Reembolso (Caixa Obra)
                   </h4>
                   <form onSubmit={handleExecuteRefund} className="space-y-4">
                     <div>
-                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Sócio Reembolsado</label>
+                      <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Sócio Reembolsado</label>
                       <select
                         required
                         value={refundSocioId}
                         onChange={(e) => setRefundSocioId(e.target.value)}
-                        className="premium-input text-xs"
+                        className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                       >
                         <option value="">Selecione o sócio...</option>
                         {partners.map(p => (
@@ -564,41 +564,41 @@ export default function ObrasPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Valor do Payout (R$)</label>
+                      <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Valor do Payout (R$)</label>
                       <input
                         type="number"
                         required
                         value={refundAmount}
                         onChange={(e) => setRefundAmount(e.target.value)}
                         placeholder="Ex: 500"
-                        className="premium-input text-xs"
+                        className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                       />
                     </div>
-                    <button type="submit" className="premium-button-emerald w-full py-2 text-xs font-bold">
+                    <button type="submit" className="premium-button-emerald w-full py-2 text-xs font-bold shadow-sm">
                       Confirmar Reembolso
                     </button>
                   </form>
                 </div>
 
                 {/* ADD CALENDAR LOG */}
-                <div className="bg-[#121214] p-5 rounded-xl border border-zinc-800">
-                  <h4 className="font-bold text-sm text-zinc-200 mb-4 flex items-center gap-2">
+                <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                  <h4 className="font-bold text-sm text-slate-700 mb-4 flex items-center gap-2">
                     <CalendarDays className="h-4 w-4 text-solar-blue" />
                     Registrar Dia de Serviço
                   </h4>
                   <form onSubmit={handleAddCalendarDay} className="space-y-4">
                     <div>
-                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Data do Lançamento</label>
+                      <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Data do Lançamento</label>
                       <input
                         type="date"
                         required
                         value={calendarDate}
                         onChange={(e) => setCalendarDate(e.target.value)}
-                        className="premium-input text-xs"
+                        className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Selecionar Equipe</label>
+                      <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Selecionar Equipe</label>
                       <div className="grid grid-cols-2 gap-2 mt-2">
                         {workers.map(w => (
                           <button
@@ -607,8 +607,8 @@ export default function ObrasPage() {
                             onClick={() => toggleWorkerSelection(w.id)}
                             className={`px-2 py-1.5 rounded-lg text-left text-[11px] transition border flex items-center justify-between ${
                               selectedWorkers.includes(w.id)
-                                ? 'bg-solar-blue/10 border-solar-blue/40 text-zinc-100 font-bold'
-                                : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800'
+                                ? 'bg-sky-50 border-solar-blue/40 text-solar-blue font-bold'
+                                : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                             }`}
                           >
                             <span>{w.nome}</span>
@@ -616,38 +616,38 @@ export default function ObrasPage() {
                         ))}
                       </div>
                     </div>
-                    <button type="submit" className="premium-button-blue w-full py-2 text-xs font-bold">
+                    <button type="submit" className="premium-button-blue w-full py-2 text-xs font-bold shadow-sm">
                       Logar Dia
                     </button>
                   </form>
                 </div>
               </div>
 
-              {/* COLUMN B: DIRECT INSTANT EXPENSE LOGGER (ROBUST ADDITION) */}
+              {/* COLUMN B: DIRECT INSTANT EXPENSE LOGGER */}
               <div className="space-y-6">
-                <div className="bg-[#121214] p-5 rounded-xl border border-zinc-800">
-                  <h4 className="font-bold text-sm text-zinc-200 mb-4 flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 text-red-400" />
+                <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                  <h4 className="font-bold text-sm text-slate-700 mb-4 flex items-center gap-2 font-bold">
+                    <AlertCircle className="h-4 w-4 text-red-500" />
                     Lançar Custo de Campo
                   </h4>
                   <form onSubmit={handleLogInstantExpense} className="space-y-4">
                     <div>
-                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Valor Custo (R$)</label>
+                      <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Valor Custo (R$)</label>
                       <input
                         type="number"
                         required
                         value={expenseVal}
                         onChange={(e) => setExpenseVal(e.target.value)}
                         placeholder="Ex: 130"
-                        className="premium-input text-xs"
+                        className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Categoria do Custo</label>
+                      <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Categoria do Custo</label>
                       <select
                         value={expenseCat}
                         onChange={(e) => setExpenseCat(e.target.value)}
-                        className="premium-input text-xs"
+                        className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                       >
                         <option value="UBER">Uber</option>
                         <option value="ALIMENTACAO">Alimentação</option>
@@ -659,29 +659,29 @@ export default function ObrasPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Quem adiantou o valor?</label>
+                      <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Quem adiantou o valor?</label>
                       <select
                         value={expensePaidBy}
                         onChange={(e) => setExpensePaidBy(e.target.value)}
-                        className="premium-input text-xs"
+                        className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                       >
                         <option value="">Caixa da Empresa (Caixa)</option>
                         {partners.map(p => (
-                          <option key={p.id} value={p.id}>{p.nome} (Sócio)</option>
+                          <option key={p.id} value={p.id}>{p.nome}</option>
                         ))}
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Descrição / Info</label>
+                      <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase">Descrição / Info</label>
                       <input
                         type="text"
                         value={expenseDesc}
                         onChange={(e) => setExpenseDesc(e.target.value)}
                         placeholder="Ex: Uber ida buscar inversores..."
-                        className="premium-input text-xs"
+                        className="premium-input text-xs bg-white border border-slate-200 text-slate-800"
                       />
                     </div>
-                    <button type="submit" className="premium-button-blue w-full py-2 text-xs font-bold">
+                    <button type="submit" className="premium-button-blue w-full py-2 text-xs font-bold shadow-sm">
                       Salvar Custo
                     </button>
                   </form>
@@ -690,25 +690,25 @@ export default function ObrasPage() {
 
               {/* COLUMN C: CALENDAR SERVICE LOGS HISTORY */}
               <div className="space-y-4">
-                <h4 className="font-bold text-sm text-zinc-200 flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-zinc-400" />
+                <h4 className="font-bold text-sm text-slate-700 flex items-center gap-2">
+                  <Calendar className="h-4 w-4 text-slate-400" />
                   Histórico de Trabalho no Campo ({calendarHistory.length} dias)
                 </h4>
                 <div className="space-y-3 max-h-[380px] overflow-y-auto pr-1">
                   {calendarHistory.length === 0 ? (
-                    <p className="text-xs text-zinc-500 italic py-6 text-center bg-zinc-900/10 rounded-xl border border-dashed border-zinc-850">
+                    <p className="text-xs text-slate-400 italic py-6 text-center bg-slate-50 rounded-xl border border-dashed border-slate-200">
                       Nenhum dia de trabalho registrado nesta obra ainda.
                     </p>
                   ) : (
                     calendarHistory.map((day) => (
-                      <div key={day.id} className="bg-zinc-900/50 p-4 rounded-xl border border-zinc-850/80 flex items-center justify-between gap-4">
+                      <div key={day.id} className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex items-center justify-between gap-4 shadow-sm">
                         <div className="flex items-center gap-3">
                           <CheckCircle2 className="h-4 w-4 text-solar-emerald shrink-0" />
                           <div>
-                            <p className="text-xs font-bold text-zinc-200">
+                            <p className="text-xs font-bold text-slate-800">
                               {new Date(day.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
                             </p>
-                            <p className="text-[10px] text-zinc-500 mt-0.5">
+                            <p className="text-[10px] text-slate-500 mt-0.5">
                               Presentes: {day.equipe.map(e => e.nome).join(', ')}
                             </p>
                           </div>

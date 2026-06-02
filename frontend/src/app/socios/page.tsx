@@ -77,12 +77,12 @@ export default function SociosPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 text-slate-800">
       
       {/* HEADER SECTION */}
       <div>
-        <h2 className="text-2xl font-bold tracking-tight text-zinc-100">Controle de Sócios & Waterfall</h2>
-        <p className="text-zinc-500 text-sm mt-1">Divisão societária de 50/50 com prioridade de reembolso sobre custos de campo</p>
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900">Controle de Sócios & Waterfall</h2>
+        <p className="text-slate-500 text-sm mt-1">Divisão societária de 50/50 com prioridade de reembolso sobre custos de campo</p>
       </div>
 
       {/* COMPARATIVE CARDS */}
@@ -93,28 +93,28 @@ export default function SociosPage() {
           return (
             <div 
               key={partner.id} 
-              className={`glass-card rounded-2xl p-6 relative overflow-hidden border-t-4 ${
+              className={`glass-card rounded-2xl p-6 relative overflow-hidden border bg-white border-slate-200 border-t-4 ${
                 isRafael ? 'border-t-solar-steel' : 'border-t-solar-blue'
-              }`}
+              } shadow-sm`}
             >
               
               {/* Profile header */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg border ${
+                  <div className={`p-2.5 rounded-xl border ${
                     isRafael 
-                      ? 'bg-solar-steel/10 border-solar-steel/20 text-solar-steel' 
-                      : 'bg-solar-blue/10 border-solar-blue/20 text-solar-blue'
+                      ? 'bg-sky-50 border-sky-100 text-solar-blue' 
+                      : 'bg-sky-50 border-sky-100 text-solar-blue'
                   }`}>
                     <UserCheck className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-zinc-100 tracking-tight">{partner.nome}</h3>
-                    <p className="text-[10px] text-zinc-500 font-semibold uppercase">Participação societária: {partner.percentualSplit}%</p>
+                    <h3 className="text-lg font-bold text-slate-900 tracking-tight">{partner.nome}</h3>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">Participação societária: {partner.percentualSplit}%</p>
                   </div>
                 </div>
                 
-                <span className="text-xs bg-zinc-900 border border-zinc-800 text-zinc-400 px-2.5 py-1 rounded-lg">
+                <span className="text-xs bg-slate-50 border border-slate-200 text-slate-500 px-2.5 py-1 rounded-lg font-semibold">
                   Sócio Ativo
                 </span>
               </div>
@@ -123,32 +123,32 @@ export default function SociosPage() {
               <div className="space-y-3.5 mt-4">
                 
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-zinc-500 font-medium">1. Financiou do Bolso (Despesas Obras):</span>
-                  <span className="font-bold text-zinc-300">{formatCurrency(partner.totalInvestidoBolso)}</span>
+                  <span className="text-slate-500 font-medium">1. Financiou do Bolso (Despesas Obras):</span>
+                  <span className="font-bold text-slate-700">{formatCurrency(partner.totalInvestidoBolso)}</span>
                 </div>
 
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-zinc-500 font-medium">2. Reembolsos Já Recebidos:</span>
-                  <span className="font-bold text-zinc-300 text-red-400">-{formatCurrency(partner.totalReembolsado)}</span>
+                  <span className="text-slate-500 font-medium">2. Reembolsos Já Recebidos:</span>
+                  <span className="font-bold text-red-500">-{formatCurrency(partner.totalReembolsado)}</span>
                 </div>
 
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-solar-steel font-semibold">3. Reembolso Pendente (A Receber):</span>
+                  <span className="text-solar-blue font-bold">3. Reembolso Pendente (A Receber):</span>
                   <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
-                    partner.reembolsoPendente > 0 ? 'bg-solar-steel/15 text-solar-steel' : 'bg-zinc-900 text-zinc-500'
+                    partner.reembolsoPendente > 0 ? 'bg-sky-50 text-solar-blue border border-sky-100' : 'bg-slate-50 text-slate-400'
                   }`}>
                     {formatCurrency(partner.reembolsoPendente)}
                   </span>
                 </div>
 
-                <div className="flex justify-between items-center text-xs border-t border-zinc-850 pt-3">
-                  <span className="text-zinc-500 font-medium">4. Participação Teórica nos Lucros:</span>
-                  <span className="font-bold text-zinc-300">{formatCurrency(partner.divisaoLucroGlobal)}</span>
+                <div className="flex justify-between items-center text-xs border-t border-slate-100 pt-3">
+                  <span className="text-slate-500 font-medium">4. Participação Teórica nos Lucros:</span>
+                  <span className="font-bold text-slate-700">{formatCurrency(partner.divisaoLucroGlobal)}</span>
                 </div>
 
-                <div className="flex justify-between items-center text-sm border-t border-zinc-850 pt-3">
-                  <span className="text-zinc-400 font-bold uppercase">Saldo Atual do Sócio:</span>
-                  <span className={`text-base font-extrabold ${partner.saldoSocio >= 0 ? 'text-solar-emerald' : 'text-red-400'}`}>
+                <div className="flex justify-between items-center text-sm border-t border-slate-100 pt-3">
+                  <span className="text-slate-500 font-bold uppercase">Saldo Atual do Sócio:</span>
+                  <span className={`text-base font-extrabold ${partner.saldoSocio >= 0 ? 'text-solar-emerald' : 'text-red-500'}`}>
                     {formatCurrency(partner.saldoSocio)}
                   </span>
                 </div>
@@ -162,21 +162,21 @@ export default function SociosPage() {
 
       {/* REFUND HISTORY */}
       <div className="space-y-4">
-        <h3 className="font-bold text-base text-zinc-200 flex items-center gap-2">
-          <Receipt className="h-4 w-4 text-zinc-500" />
+        <h3 className="font-bold text-base text-slate-700 flex items-center gap-2">
+          <Receipt className="h-4 w-4 text-slate-400" />
           Histórico de Pagamentos de Reembolso (Vouchers)
         </h3>
         
         {refunds.length === 0 ? (
-          <div className="glass-panel rounded-2xl p-8 text-center text-zinc-500 text-xs italic">
+          <div className="glass-panel rounded-2xl p-8 text-center text-slate-500 text-xs italic bg-white border border-slate-200 shadow-sm">
             Nenhum reembolso pago ainda. Pagamentos de reembolsos são feitos a partir do caixa recebido das obras.
           </div>
         ) : (
-          <div className="glass-panel rounded-2xl overflow-hidden border border-zinc-850">
+          <div className="glass-panel rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-zinc-850 bg-zinc-900/30 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
+                  <tr className="border-b border-slate-200 bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                     <th className="px-6 py-4">Data</th>
                     <th className="px-6 py-4">Sócio</th>
                     <th className="px-6 py-4">Obra de Origem</th>
@@ -184,23 +184,23 @@ export default function SociosPage() {
                     <th className="px-6 py-4">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-850/60 text-xs">
+                <tbody className="divide-y divide-slate-100 text-xs">
                   {refunds.map((reemb) => (
-                    <tr key={reemb.id} className="hover:bg-zinc-900/30 transition">
-                      <td className="px-6 py-4 text-zinc-400">
+                    <tr key={reemb.id} className="hover:bg-slate-50/50 transition">
+                      <td className="px-6 py-4 text-slate-500">
                         {new Date(reemb.data).toLocaleDateString('pt-BR')}
                       </td>
-                      <td className="px-6 py-4 font-bold text-zinc-200">
+                      <td className="px-6 py-4 font-bold text-slate-800">
                         {reemb.socio.user.nome}
                       </td>
-                      <td className="px-6 py-4 text-zinc-400">
+                      <td className="px-6 py-4 text-slate-500">
                         {reemb.obra.nome}
                       </td>
                       <td className="px-6 py-4 font-bold text-solar-emerald">
                         {formatCurrency(reemb.valor)}
                       </td>
                       <td className="px-6 py-4">
-                        <span className="px-2 py-0.5 bg-solar-emerald/10 border border-solar-emerald/20 text-solar-emerald rounded font-bold text-[10px] uppercase">
+                        <span className="px-2 py-0.5 bg-emerald-50 border border-emerald-100 text-solar-emerald rounded font-bold text-[10px] uppercase">
                           Liquidado
                         </span>
                       </td>

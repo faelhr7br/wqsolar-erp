@@ -22,7 +22,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    loading || setLoading(true);
     setError('');
 
     try {
@@ -49,37 +49,37 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-background px-4 py-12 relative overflow-hidden">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-slate-50 px-4 py-12 relative overflow-hidden text-slate-800">
       
-      {/* GLOWING AMBIENT ARTIFICIAL LIGHT EFFECTS */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-solar-blue/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-10 left-10 w-[250px] h-[250px] bg-solar-emerald/5 rounded-full blur-[90px] pointer-events-none"></div>
+      {/* GLOWING AMBIENT LIGHT EFFECTS */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-sky-50 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-10 left-10 w-[250px] h-[250px] bg-emerald-50 rounded-full blur-[90px] pointer-events-none"></div>
 
       <div className="w-full max-w-md space-y-8 relative z-10">
         
         {/* LOGO AREA */}
         <div className="flex flex-col items-center space-y-3 text-center">
-          <div className="p-3 bg-solar-blue/10 rounded-2xl border border-solar-blue/20 shadow-lg shadow-solar-blue/5">
+          <div className="p-3 bg-sky-50 rounded-2xl border border-sky-100 shadow-md shadow-sky-500/5">
             <Sun className="h-10 w-10 text-solar-blue animate-pulse" />
           </div>
           <div>
-            <h1 className="text-3xl font-extrabold text-zinc-100 tracking-tight">WQ Solar</h1>
-            <p className="mt-1 text-sm text-zinc-400">ERP Financeiro e Operacional Solar</p>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">WQ Solar</h1>
+            <p className="mt-1 text-sm text-slate-500">ERP Financeiro e Operacional Solar</p>
           </div>
         </div>
 
         {/* GLASS CARD FORM CONTAINER */}
-        <div className="glass-panel rounded-2xl p-8 shadow-2xl">
+        <div className="glass-panel rounded-2xl p-8 bg-white border border-slate-200 shadow-xl">
           <div className="mb-6">
-            <h2 className="text-xl font-bold text-zinc-100">Bem-vindo</h2>
-            <p className="text-xs text-zinc-500 mt-1">Insira suas credenciais corporativas para acessar</p>
+            <h2 className="text-xl font-bold text-slate-900">Bem-vindo</h2>
+            <p className="text-xs text-slate-500 mt-1">Insira suas credenciais corporativas para acessar</p>
           </div>
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             
             {/* EMAIL INPUT */}
             <div>
-              <label htmlFor="email" className="block text-xs font-semibold text-zinc-400 mb-1.5 uppercase tracking-wider">
+              <label htmlFor="email" className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wider">
                 E-mail
               </label>
               <input
@@ -89,13 +89,13 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="rafael@wqsolar.com"
-                className="premium-input"
+                className="premium-input bg-white text-slate-800 border border-slate-200"
               />
             </div>
 
             {/* PASSWORD INPUT */}
             <div>
-              <label htmlFor="password" className="block text-xs font-semibold text-zinc-400 mb-1.5 uppercase tracking-wider">
+              <label htmlFor="password" className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wider">
                 Senha
               </label>
               <input
@@ -105,13 +105,13 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="premium-input"
+                className="premium-input bg-white text-slate-800 border border-slate-200"
               />
             </div>
 
             {/* ERRORS LOG */}
             {error && (
-              <div className="flex items-center gap-2 p-3.5 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-xs font-medium">
+              <div className="flex items-center gap-2 p-3.5 bg-red-50 border border-red-100 text-red-500 rounded-lg text-xs font-medium">
                 <ShieldAlert className="h-4 w-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -121,7 +121,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="premium-button-blue w-full flex items-center justify-center gap-2 py-2.5 font-bold shadow-lg shadow-solar-blue/20"
+              className="premium-button-blue w-full flex items-center justify-center gap-2 py-2.5 font-bold shadow-md shadow-solar-blue/20"
             >
               {loading ? (
                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
@@ -135,7 +135,7 @@ export default function LoginPage() {
 
         {/* SEED NOTICE INFO FOOTER */}
         <div className="text-center">
-          <p className="text-[10px] text-zinc-600">
+          <p className="text-[10px] text-slate-400">
             Acesso administrativo seguro. Use as credenciais cadastradas na inicialização.
           </p>
         </div>
