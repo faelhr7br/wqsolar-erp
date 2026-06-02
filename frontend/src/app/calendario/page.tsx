@@ -103,7 +103,7 @@ export default function CalendarioPage() {
   if (loading) {
     return (
       <div className="flex h-[70vh] items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-violet border-t-transparent"></div>
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-blue border-t-transparent"></div>
       </div>
     );
   }
@@ -169,11 +169,11 @@ export default function CalendarioPage() {
                   key={day.toISOString()} 
                   className={`h-20 p-2 border bg-zinc-900/30 rounded-lg flex flex-col justify-between overflow-hidden relative ${
                     isToday 
-                      ? 'border-solar-violet shadow-md shadow-solar-violet/5' 
+                      ? 'border-solar-blue shadow-md shadow-solar-blue/5' 
                       : 'border-zinc-850/80 hover:border-zinc-700'
                   }`}
                 >
-                  <span className={`text-[10px] font-bold ${isToday ? 'text-solar-violet font-extrabold' : 'text-zinc-500'}`}>
+                  <span className={`text-[10px] font-bold ${isToday ? 'text-solar-blue font-extrabold' : 'text-zinc-500'}`}>
                     {day.getDate()}
                   </span>
                   
@@ -181,7 +181,7 @@ export default function CalendarioPage() {
                     {dateLogs.map(log => (
                       <div 
                         key={log.id} 
-                        className="text-[8px] bg-solar-violet/10 border border-solar-violet/25 text-zinc-200 font-bold px-1 py-0.5 rounded truncate"
+                        className="text-[8px] bg-solar-blue/10 border border-solar-blue/25 text-zinc-200 font-bold px-1 py-0.5 rounded truncate"
                         title={`${log.obraNome} - Equipe: ${log.equipe.join(', ')}`}
                       >
                         {log.obraNome}
@@ -211,7 +211,7 @@ export default function CalendarioPage() {
               logs.map((log) => (
                 <div key={log.id} className="glass-card rounded-xl p-4 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-solar-violet uppercase bg-solar-violet/10 px-2 py-0.5 rounded border border-solar-violet/20">
+                    <span className="text-[10px] font-bold text-solar-steel uppercase bg-solar-steel/10 px-2 py-0.5 rounded border border-solar-steel/20">
                       Instalação Solar
                     </span>
                     <span className="text-[10px] text-zinc-500 font-medium">

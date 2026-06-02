@@ -18,9 +18,10 @@ module.exports = {
         },
         solar: {
           yellow: '#f59e0b',
-          blue: '#3b82f6',
-          emerald: '#10b981',
-          violet: '#8b5cf6'
+          blue: '#0284c7', // Slate blue
+          emerald: '#10b981', // Flat emerald green
+          steel: '#38bdf8', // Cool steel accent
+          slate: '#475569'
         }
       },
       fontFamily: {

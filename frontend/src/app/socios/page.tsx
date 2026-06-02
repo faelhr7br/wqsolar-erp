@@ -71,7 +71,7 @@ export default function SociosPage() {
   if (loading) {
     return (
       <div className="flex h-[70vh] items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-violet border-t-transparent"></div>
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-blue border-t-transparent"></div>
       </div>
     );
   }
@@ -94,7 +94,7 @@ export default function SociosPage() {
             <div 
               key={partner.id} 
               className={`glass-card rounded-2xl p-6 relative overflow-hidden border-t-4 ${
-                isRafael ? 'border-t-solar-violet' : 'border-t-solar-blue'
+                isRafael ? 'border-t-solar-steel' : 'border-t-solar-blue'
               }`}
             >
               
@@ -103,7 +103,7 @@ export default function SociosPage() {
                 <div className="flex items-center gap-3">
                   <div className={`p-2 rounded-lg border ${
                     isRafael 
-                      ? 'bg-solar-violet/10 border-solar-violet/20 text-solar-violet' 
+                      ? 'bg-solar-steel/10 border-solar-steel/20 text-solar-steel' 
                       : 'bg-solar-blue/10 border-solar-blue/20 text-solar-blue'
                   }`}>
                     <UserCheck className="h-5 w-5" />
@@ -133,9 +133,9 @@ export default function SociosPage() {
                 </div>
 
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-solar-violet font-semibold">3. Reembolso Pendente (A Receber):</span>
+                  <span className="text-solar-steel font-semibold">3. Reembolso Pendente (A Receber):</span>
                   <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
-                    partner.reembolsoPendente > 0 ? 'bg-solar-violet/15 text-solar-violet' : 'bg-zinc-900 text-zinc-500'
+                    partner.reembolsoPendente > 0 ? 'bg-solar-steel/15 text-solar-steel' : 'bg-zinc-900 text-zinc-500'
                   }`}>
                     {formatCurrency(partner.reembolsoPendente)}
                   </span>

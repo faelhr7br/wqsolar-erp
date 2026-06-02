@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground antialiased selection:bg-solar-violet/30 selection:text-white;
+    @apply bg-background text-foreground antialiased selection:bg-solar-blue/20 selection:text-white;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
@@ -25,7 +25,7 @@
 }
 
 .glass-card:hover {
-  border-color: rgba(139, 92, 246, 0.4);
+  border-color: rgba(56, 189, 248, 0.4);
   transform: translateY(-2px);
 }
 
@@ -50,11 +50,11 @@
 
 /* Smooth input styling */
 .premium-input {
-  @apply w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-solar-violet focus:border-solar-violet transition-all duration-150;
+  @apply w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-solar-blue focus:border-solar-blue transition-all duration-150;
 }
 
-.premium-button-violet {
-  @apply bg-solar-violet hover:bg-violet-600 text-white rounded-lg px-4 py-2 font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-solar-violet/50 active:scale-[0.98];
+.premium-button-blue {
+  @apply bg-solar-blue hover:bg-sky-600 text-white rounded-lg px-4 py-2 font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-solar-blue/50 active:scale-[0.98];
 }
 
 .premium-button-emerald {

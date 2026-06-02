@@ -12,7 +12,8 @@ import {
   LogOut, 
   Menu, 
   X,
-  User
+  User,
+  Wrench
 } from 'lucide-react';
 import './globals.css';
 
@@ -59,7 +60,7 @@ export default function RootLayout({
         </head>
         <body className="bg-background text-foreground font-sans">
           <div className="flex h-screen items-center justify-center bg-background">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-violet border-t-transparent"></div>
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-blue border-t-transparent"></div>
           </div>
         </body>
       </html>
@@ -85,6 +86,7 @@ export default function RootLayout({
     { name: 'Obras', path: '/obras', icon: HardHat },
     { name: 'Financeiro', path: '/financeiro', icon: DollarSign },
     { name: 'Sócios', path: '/socios', icon: Users },
+    { name: 'Funcionários', path: '/funcionarios', icon: Wrench },
     { name: 'Calendário', path: '/calendario', icon: Calendar },
   ];
 
@@ -103,8 +105,8 @@ export default function RootLayout({
             <div className="space-y-8">
               {/* Brand Header */}
               <div className="flex items-center gap-3 px-2">
-                <div className="p-2 bg-solar-violet/10 rounded-lg border border-solar-violet/20">
-                  <Sun className="h-6 w-6 text-solar-violet animate-pulse" />
+                <div className="p-2 bg-solar-blue/10 rounded-lg border border-solar-blue/20">
+                  <Sun className="h-6 w-6 text-solar-blue animate-pulse" />
                 </div>
                 <div>
                   <h1 className="font-bold text-lg text-zinc-100 tracking-tight leading-none">WQ Solar</h1>
@@ -123,7 +125,7 @@ export default function RootLayout({
                       onClick={() => router.push(item.path)}
                       className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-150 ${
                         isActive 
-                          ? 'bg-solar-violet text-white font-semibold shadow-md shadow-solar-violet/10' 
+                          ? 'bg-solar-blue text-white font-semibold shadow-md shadow-solar-blue/10' 
                           : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
                       }`}
                     >
@@ -166,7 +168,7 @@ export default function RootLayout({
                 <div className="space-y-8">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <Sun className="h-6 w-6 text-solar-violet" />
+                      <Sun className="h-6 w-6 text-solar-blue" />
                       <div>
                         <h1 className="font-bold text-lg text-zinc-100">WQ Solar</h1>
                         <span className="text-[10px] text-zinc-500 font-semibold tracking-wider">ERP</span>
@@ -193,7 +195,7 @@ export default function RootLayout({
                           }}
                           className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-medium transition-all ${
                             isActive 
-                              ? 'bg-solar-violet text-white font-semibold' 
+                              ? 'bg-solar-blue text-white font-semibold' 
                               : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
                           }`}
                         >
@@ -234,7 +236,7 @@ export default function RootLayout({
             {/* MOBILE HEADER BAR */}
             <header className="flex md:hidden items-center justify-between px-6 py-4 border-b border-card-border bg-[#09090b]/80 backdrop-blur sticky top-0 z-40">
               <div className="flex items-center gap-2">
-                <Sun className="h-5 w-5 text-solar-violet animate-pulse" />
+                <Sun className="h-5 w-5 text-solar-blue animate-pulse" />
                 <span className="font-bold text-sm text-zinc-200 tracking-tight">WQ Solar</span>
               </div>
               <button 

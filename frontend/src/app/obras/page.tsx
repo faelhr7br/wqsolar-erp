@@ -15,7 +15,8 @@ import {
   PlusCircle,
   Calendar,
   CheckCircle2,
-  Trash2
+  Trash2,
+  AlertCircle
 } from 'lucide-react';
 import api from '../../utils/api';
 
@@ -79,6 +80,12 @@ export default function ObrasPage() {
   const [partners, setPartners] = useState<{ id: string; nome: string }[]>([]);
   const [calendarDate, setCalendarDate] = useState('');
   const [selectedWorkers, setSelectedWorkers] = useState<string[]>([]);
+
+  // Instant Expense Log Inside Modal
+  const [expenseVal, setExpenseVal] = useState('');
+  const [expenseCat, setExpenseCat] = useState('MATERIAL');
+  const [expensePaidBy, setExpensePaidBy] = useState(''); // Empty = Caixa da Empresa
+  const [expenseDesc, setExpenseDesc] = useState('');
 
   const fetchObras = async () => {
     try {
@@ -205,6 +212,34 @@ export default function ObrasPage() {
     }
   };
 
+  const handleLogInstantExpense = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedObra || !expenseVal) return;
+
+    try {
+      await api.post('/api/financeiro/transaction', {
+        valor: parseFloat(expenseVal),
+        tipo: 'SAIDA',
+        categoriaSaida: expenseCat,
+        descricao: expenseDesc || 'Lançado no modal da obra',
+        obraId: selectedObra.obraId,
+        socioId: expensePaidBy || null
+      });
+
+      setExpenseVal('');
+      setExpenseDesc('');
+      
+      // refresh details
+      const updatedList = await api.get('/api/obras');
+      setObras(updatedList.data);
+      const newlyFetched = updatedList.data.find((o: any) => o.obraId === selectedObra.obraId);
+      if (newlyFetched) setSelectedObra(newlyFetched);
+      alert('Despesa lançada com sucesso!');
+    } catch (err) {
+      alert('Erro ao lançar despesa.');
+    }
+  };
+
   const handleDeleteObra = async (id: string) => {
     if (!confirm('Deseja realmente deletar esta obra? Todos os lançamentos serão perdidos.')) return;
     try {
@@ -232,7 +267,7 @@ export default function ObrasPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'EM_ANDAMENTO':
-        return 'bg-solar-violet/10 text-solar-violet border border-solar-violet/20';
+        return 'bg-solar-blue/10 text-solar-steel border border-solar-blue/20';
       case 'FINALIZADA':
         return 'bg-solar-emerald/10 text-solar-emerald border border-solar-emerald/20';
       case 'PENDENTE_RECEBIMENTO':
@@ -249,7 +284,7 @@ export default function ObrasPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       
       {/* HEADER SECTION */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -259,7 +294,7 @@ export default function ObrasPage() {
         </div>
         <button
           onClick={() => setIsCreateOpen(true)}
-          className="premium-button-violet flex items-center gap-2 text-sm shadow-lg shadow-solar-violet/10"
+          className="premium-button-blue flex items-center gap-2 text-sm shadow-lg shadow-solar-blue/10"
         >
           <Plus className="h-4 w-4" />
           Nova Obra
@@ -281,7 +316,7 @@ export default function ObrasPage() {
       {/* WORKS GRID LIST */}
       {loading ? (
         <div className="flex justify-center py-12">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-violet border-t-transparent"></div>
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-blue border-t-transparent"></div>
         </div>
       ) : filteredObras.length === 0 ? (
         <div className="glass-panel rounded-2xl p-12 text-center text-zinc-500">
@@ -312,7 +347,7 @@ export default function ObrasPage() {
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-zinc-500">Faturado:</span>
-                    <span className="font-semibold text-solar-violet">{formatCurrency(obra.totalEntradas)}</span>
+                    <span className="font-semibold text-solar-blue">{formatCurrency(obra.totalEntradas)}</span>
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-zinc-500">Custo Total:</span>
@@ -407,7 +442,7 @@ export default function ObrasPage() {
                 />
               </div>
 
-              <button type="submit" className="premium-button-violet w-full py-2.5 font-bold mt-2">
+              <button type="submit" className="premium-button-blue w-full py-2.5 font-bold mt-2">
                 Criar Obra
               </button>
             </form>
@@ -453,7 +488,7 @@ export default function ObrasPage() {
                   onClick={() => handleStatusChange(st)}
                   className={`px-3 py-1.5 rounded-lg font-semibold transition ${
                     selectedObra.status === st 
-                      ? 'bg-solar-violet text-white shadow' 
+                      ? 'bg-solar-blue text-white shadow' 
                       : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
                   }`}
                 >
@@ -470,7 +505,7 @@ export default function ObrasPage() {
                 <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Métricas Financeiras</h4>
                 <div className="space-y-1.5 text-xs">
                   <div className="flex justify-between"><span className="text-zinc-500">Contratado:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.valorFechado)}</span></div>
-                  <div className="flex justify-between"><span className="text-zinc-500">Entradas (Faturamento):</span><span className="font-semibold text-solar-violet">{formatCurrency(selectedObra.totalEntradas)}</span></div>
+                  <div className="flex justify-between"><span className="text-zinc-500">Entradas (Faturamento):</span><span className="font-semibold text-solar-blue">{formatCurrency(selectedObra.totalEntradas)}</span></div>
                   <div className="flex justify-between"><span className="text-zinc-500">Custos Totais:</span><span className="font-semibold text-red-400">{formatCurrency(selectedObra.totalSaidas)}</span></div>
                   <div className="border-t border-zinc-850 pt-2 flex justify-between font-bold"><span className="text-zinc-400">LUCRO LÍQUIDO:</span><span className={selectedObra.lucroLiquido >= 0 ? 'text-solar-emerald' : 'text-red-400'}>{formatCurrency(selectedObra.lucroLiquido)}</span></div>
                 </div>
@@ -482,7 +517,7 @@ export default function ObrasPage() {
                 <div className="space-y-1.5 text-xs">
                   <div className="flex justify-between"><span className="text-zinc-500">Pago do Bolso:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.gastoSocioRafael)}</span></div>
                   <div className="flex justify-between"><span className="text-zinc-500">Reembolsado:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.reembolsadoRafael)}</span></div>
-                  <div className="border-t border-zinc-850 pt-2 flex justify-between font-bold text-solar-violet">
+                  <div className="border-t border-zinc-850 pt-2 flex justify-between font-bold text-solar-blue">
                     <span>A REEMBOLSAR:</span>
                     <span>{formatCurrency(selectedObra.reembolsoPendenteRafael)}</span>
                   </div>
@@ -495,7 +530,7 @@ export default function ObrasPage() {
                 <div className="space-y-1.5 text-xs">
                   <div className="flex justify-between"><span className="text-zinc-500">Pago do Bolso:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.gastoSocioWilson)}</span></div>
                   <div className="flex justify-between"><span className="text-zinc-500">Reembolsado:</span><span className="font-semibold text-zinc-200">{formatCurrency(selectedObra.reembolsadoWilson)}</span></div>
-                  <div className="border-t border-zinc-850 pt-2 flex justify-between font-bold text-solar-blue">
+                  <div className="border-t border-zinc-850 pt-2 flex justify-between font-bold text-zinc-400">
                     <span>A REEMBOLSAR:</span>
                     <span>{formatCurrency(selectedObra.reembolsoPendenteWilson)}</span>
                   </div>
@@ -504,14 +539,14 @@ export default function ObrasPage() {
 
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               
               {/* COLUMN A: REEMBOLSO EXECUTION FORM */}
               <div className="space-y-6">
                 <div className="bg-[#121214] p-5 rounded-xl border border-zinc-800">
                   <h4 className="font-bold text-sm text-zinc-200 mb-4 flex items-center gap-2">
                     <DollarSign className="h-4 w-4 text-solar-emerald" />
-                    Pagar Reembolso (Com caixa da obra)
+                    Pagar Reembolso (Caixa Obra)
                   </h4>
                   <form onSubmit={handleExecuteRefund} className="space-y-4">
                     <div>
@@ -540,7 +575,7 @@ export default function ObrasPage() {
                       />
                     </div>
                     <button type="submit" className="premium-button-emerald w-full py-2 text-xs font-bold">
-                      Confirmar Payout de Reembolso
+                      Confirmar Reembolso
                     </button>
                   </form>
                 </div>
@@ -548,8 +583,8 @@ export default function ObrasPage() {
                 {/* ADD CALENDAR LOG */}
                 <div className="bg-[#121214] p-5 rounded-xl border border-zinc-800">
                   <h4 className="font-bold text-sm text-zinc-200 mb-4 flex items-center gap-2">
-                    <CalendarDays className="h-4 w-4 text-solar-violet" />
-                    Registrar Dia de Trabalho (Calendário)
+                    <CalendarDays className="h-4 w-4 text-solar-blue" />
+                    Registrar Dia de Serviço
                   </h4>
                   <form onSubmit={handleAddCalendarDay} className="space-y-4">
                     <div>
@@ -563,33 +598,97 @@ export default function ObrasPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Selecionar Equipe Presente</label>
+                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Selecionar Equipe</label>
                       <div className="grid grid-cols-2 gap-2 mt-2">
                         {workers.map(w => (
                           <button
                             key={w.id}
                             type="button"
                             onClick={() => toggleWorkerSelection(w.id)}
-                            className={`px-3 py-2 rounded-lg text-left text-xs transition border flex items-center justify-between ${
+                            className={`px-2 py-1.5 rounded-lg text-left text-[11px] transition border flex items-center justify-between ${
                               selectedWorkers.includes(w.id)
-                                ? 'bg-solar-violet/10 border-solar-violet/40 text-zinc-100 font-bold'
+                                ? 'bg-solar-blue/10 border-solar-blue/40 text-zinc-100 font-bold'
                                 : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800'
                             }`}
                           >
                             <span>{w.nome}</span>
-                            <span className="text-[9px] text-zinc-500">R$ {w.valorDiariaPadrao}</span>
                           </button>
                         ))}
                       </div>
                     </div>
-                    <button type="submit" className="premium-button-violet w-full py-2 text-xs font-bold">
-                      Logar Dia de Serviço
+                    <button type="submit" className="premium-button-blue w-full py-2 text-xs font-bold">
+                      Logar Dia
                     </button>
                   </form>
                 </div>
               </div>
 
-              {/* COLUMN B: CALENDAR SERVICE LOGS HISTORY */}
+              {/* COLUMN B: DIRECT INSTANT EXPENSE LOGGER (ROBUST ADDITION) */}
+              <div className="space-y-6">
+                <div className="bg-[#121214] p-5 rounded-xl border border-zinc-800">
+                  <h4 className="font-bold text-sm text-zinc-200 mb-4 flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 text-red-400" />
+                    Lançar Custo de Campo
+                  </h4>
+                  <form onSubmit={handleLogInstantExpense} className="space-y-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Valor Custo (R$)</label>
+                      <input
+                        type="number"
+                        required
+                        value={expenseVal}
+                        onChange={(e) => setExpenseVal(e.target.value)}
+                        placeholder="Ex: 130"
+                        className="premium-input text-xs"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Categoria do Custo</label>
+                      <select
+                        value={expenseCat}
+                        onChange={(e) => setExpenseCat(e.target.value)}
+                        className="premium-input text-xs"
+                      >
+                        <option value="UBER">Uber</option>
+                        <option value="ALIMENTACAO">Alimentação</option>
+                        <option value="MATERIAL">Material</option>
+                        <option value="COMBUSTIVEL">Combustível</option>
+                        <option value="FERRAMENTAS">Ferramentas</option>
+                        <option value="HOSPEDAGEM">Hospedagem</option>
+                        <option value="OUTROS">Outros</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Quem adiantou o valor?</label>
+                      <select
+                        value={expensePaidBy}
+                        onChange={(e) => setExpensePaidBy(e.target.value)}
+                        className="premium-input text-xs"
+                      >
+                        <option value="">Caixa da Empresa (Caixa)</option>
+                        {partners.map(p => (
+                          <option key={p.id} value={p.id}>{p.nome} (Sócio)</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-zinc-500 mb-1.5 uppercase">Descrição / Info</label>
+                      <input
+                        type="text"
+                        value={expenseDesc}
+                        onChange={(e) => setExpenseDesc(e.target.value)}
+                        placeholder="Ex: Uber ida buscar inversores..."
+                        className="premium-input text-xs"
+                      />
+                    </div>
+                    <button type="submit" className="premium-button-blue w-full py-2 text-xs font-bold">
+                      Salvar Custo
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              {/* COLUMN C: CALENDAR SERVICE LOGS HISTORY */}
               <div className="space-y-4">
                 <h4 className="font-bold text-sm text-zinc-200 flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-zinc-400" />

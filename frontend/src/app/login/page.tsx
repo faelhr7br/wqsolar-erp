@@ -52,15 +52,15 @@ export default function LoginPage() {
     <main className="flex min-h-screen flex-col items-center justify-center bg-background px-4 py-12 relative overflow-hidden">
       
       {/* GLOWING AMBIENT ARTIFICIAL LIGHT EFFECTS */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-solar-violet/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-solar-blue/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-10 left-10 w-[250px] h-[250px] bg-solar-emerald/5 rounded-full blur-[90px] pointer-events-none"></div>
 
       <div className="w-full max-w-md space-y-8 relative z-10">
         
         {/* LOGO AREA */}
         <div className="flex flex-col items-center space-y-3 text-center">
-          <div className="p-3 bg-solar-violet/10 rounded-2xl border border-solar-violet/20 shadow-lg shadow-solar-violet/5">
-            <Sun className="h-10 w-10 text-solar-violet animate-pulse" />
+          <div className="p-3 bg-solar-blue/10 rounded-2xl border border-solar-blue/20 shadow-lg shadow-solar-blue/5">
+            <Sun className="h-10 w-10 text-solar-blue animate-pulse" />
           </div>
           <div>
             <h1 className="text-3xl font-extrabold text-zinc-100 tracking-tight">WQ Solar</h1>
@@ -121,7 +121,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="premium-button-violet w-full flex items-center justify-center gap-2 py-2.5 font-bold shadow-lg shadow-solar-violet/20"
+              className="premium-button-blue w-full flex items-center justify-center gap-2 py-2.5 font-bold shadow-lg shadow-solar-blue/20"
             >
               {loading ? (
                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>

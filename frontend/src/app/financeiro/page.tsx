@@ -13,7 +13,8 @@ import {
   CalendarDays,
   User,
   Tags,
-  BookOpen
+  BookOpen,
+  X
 } from 'lucide-react';
 import api from '../../utils/api';
 
@@ -170,7 +171,7 @@ export default function FinanceiroPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       
       {/* HEADER SECTION */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -180,7 +181,7 @@ export default function FinanceiroPage() {
         </div>
         <button
           onClick={() => setIsFormOpen(true)}
-          className="premium-button-violet flex items-center gap-2 text-sm shadow-lg shadow-solar-violet/10"
+          className="premium-button-blue flex items-center gap-2 text-sm shadow-lg shadow-solar-blue/10"
         >
           <Plus className="h-4 w-4" />
           Lançar Movimentação
@@ -214,7 +215,7 @@ export default function FinanceiroPage() {
 
         {/* SALDO CAIXA */}
         <div className="glass-card rounded-xl p-5 flex items-center gap-4">
-          <div className="p-3 bg-solar-violet/10 text-solar-violet border border-solar-violet/20 rounded-xl">
+          <div className="p-3 bg-solar-blue/10 text-solar-blue border border-solar-blue/20 rounded-xl">
             <DollarSign className="h-5 w-5" />
           </div>
           <div>
@@ -239,7 +240,7 @@ export default function FinanceiroPage() {
               onClick={() => setFilterTipo(tp)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition ${
                 filterTipo === tp 
-                  ? 'bg-solar-violet border-solar-violet text-white font-bold' 
+                  ? 'bg-solar-blue border-solar-blue text-white font-bold' 
                   : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800'
               }`}
             >
@@ -264,13 +265,13 @@ export default function FinanceiroPage() {
       {/* LEDGER DATA TABLE */}
       {loading ? (
         <div className="flex justify-center py-12">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-violet border-t-transparent"></div>
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-solar-blue border-t-transparent"></div>
         </div>
       ) : filteredLedger.length === 0 ? (
         <div className="glass-panel rounded-2xl p-12 text-center text-zinc-500 border-zinc-850">
           <BookOpen className="h-10 w-10 text-zinc-600 mx-auto mb-4" />
           <p className="text-sm font-semibold">Nenhuma movimentação registrada.</p>
-          <p className="text-xs text-zinc-600 mt-1">Registre despesas de Uber, Material ou Alimentação para as obras.</p>
+          <p className="text-xs text-zinc-650 mt-1">Registre despesas de Uber, Material ou Alimentação para as obras.</p>
         </div>
       ) : (
         <div className="glass-panel rounded-2xl overflow-hidden border border-zinc-850">
@@ -496,7 +497,7 @@ export default function FinanceiroPage() {
                 />
               </div>
 
-              <button type="submit" className="premium-button-violet w-full py-2.5 font-bold mt-2">
+              <button type="submit" className="premium-button-blue w-full py-2.5 font-bold mt-2">
                 Efetuar Lançamento
               </button>
             </form>
@@ -505,14 +506,5 @@ export default function FinanceiroPage() {
       )}
 
     </div>
-  );
-}
-
-// Inline fallback X icon
-function X({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
   );
 }

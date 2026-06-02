@@ -1,0 +1,219 @@
+{
+  "name": "Advanced Solar ERP AI Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-incoming",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [0, 200],
+      "id": "webhook-trigger",
+      "name": "WhatsApp Group Webhook"
+    },
+    {
+      "parameters": {
+        "agent": "conversational",
+        "promptType": "define",
+        "text": "=Você é o Diretor de Operações e Assistente de IA do ERP da WQ Solar. Seu objetivo é ajudar os sócios Rafael (telefone final 16126) e Wilson a gerenciar a empresa diretamente do grupo de WhatsApp.\n\nRegras Societárias Importantes:\n- Rafael e Wilson dividem os lucros em exatamente 50/50.\n- Quando despesas são pagas do próprio bolso por um sócio (Ex: Rafael pagou Uber R$ 130), isso é um adiantamento. Registre como saída indicando o sócio como pagador.\n- As despesas do bolso devem ser reembolsadas prioritariamente a partir do caixa da obra antes de dividir qualquer lucro líquido.\n\nSua Persona:\n- Seja direto, claro e formate suas respostas com Markdown limpo.\n- Dê alertas de caixa caso perceba desproporção e dê conselhos/sugestões de otimização operacional de campo quando perguntado.\n\nMensagem recebida de {{ $json.body.data.key.participant || $json.body.data.key.remoteJid }}: \"{{ $json.body.data.message.conversation || $json.body.data.message.extendedTextMessage.text }}\"",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [240, 200],
+      "id": "ai-agent-node",
+      "name": "AI Agent Principal"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [160, 420],
+      "id": "openai-chat-model",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [300, 420],
+      "id": "chat-memory",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "name": "gerenciar_obra",
+        "description": "Cria uma nova obra ou atualiza seu status. Argumentos: nome da obra, cliente, valorFechado (número).",
+        "method": "POST",
+        "url": "https://api-solar.wqsolar.site/api/obras",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer seu-jwt-token-aqui-se-necessario"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"cliente\": \"{{ $parameter.cliente || $parameter.nome }}\",\n  \"valorFechado\": {{ $parameter.valorFechado }}\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttp",
+      "typeVersion": 1.1,
+      "position": [440, 420],
+      "id": "tool-obras",
+      "name": "Criar/Editar Obra"
+    },
+    {
+      "parameters": {
+        "name": "lancar_transacao",
+        "description": "Registra uma entrada (sinal, parcial) ou saída (uber, diária, material, alimentação) no caixa de uma obra. Argumentos: valor (número), tipo (ENTRADA ou SAIDA), categoria, descricao, obraId, socioId (opcional para reembolsos).",
+        "method": "POST",
+        "url": "https://api-solar.wqsolar.site/api/financeiro/transaction",
+        "sendHeaders": true,
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"valor\": {{ $parameter.valor }},\n  \"tipo\": \"{{ $parameter.tipo }}\",\n  \"categoriaSaida\": \"{{ $parameter.categoria || 'OUTROS' }}\",\n  \"descricao\": \"{{ $parameter.descricao }}\",\n  \"obraId\": \"{{ $parameter.obraId }}\",\n  \"socioId\": \"{{ $parameter.socioId || null }}\"\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttp",
+      "typeVersion": 1.1,
+      "position": [560, 420],
+      "id": "tool-finance",
+      "name": "Lançar Financeiro"
+    },
+    {
+      "parameters": {
+        "name": "obter_resumos",
+        "description": "Busca informações financeiras e operacionais de todas as obras ou de uma obra específica.",
+        "method": "GET",
+        "url": "https://api-solar.wqsolar.site/api/obras",
+        "sendHeaders": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttp",
+      "typeVersion": 1.1,
+      "position": [680, 420],
+      "id": "tool-summary",
+      "name": "Consultar Obras"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://easypanel.wqsolar.site/instance/sua-instancia-aqui/message/sendText/seu-nome-aqui",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "sua-chave-api-aqui"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('WhatsApp Group Webhook').item.json.body.data.key.remoteJid }}\",\n  \"options\": {\n    \"delay\": 1200,\n    \"presence\": \"composing\"\n  },\n  \"text\": \"{{ $json.output }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [480, 200],
+      "id": "reply-to-wa",
+      "name": "Responder no Grupo"
+    }
+  ],
+  "connections": {
+    "WhatsApp Group Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent Principal": {
+      "main": [
+        [
+          {
+            "node": "reply-to-wa",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar/Editar Obra": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lançar Financeiro": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar Obras": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Principal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -120,4 +120,18 @@ export async function dashboardRoutes(fastify: FastifyInstance) {
       return reply.code(500).send({ message: 'Erro ao gerar dados do painel.' });
     }
   });
+
+  fastify.get('/ai-logs', async (request, reply) => {
+    try {
+      const logs = await prisma.mensagemWhatsapp.findMany({
+        take: 30,
+        orderBy: { createdAt: 'desc' }
+      });
+      return reply.send(logs);
+    } catch (err: any) {
+      console.error('Error fetching AI logs:', err);
+      return reply.code(500).send({ message: 'Erro ao buscar logs da IA.' });
+    }
+  });
 }
+
