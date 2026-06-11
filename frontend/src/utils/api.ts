@@ -14,7 +14,7 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('wqsolar_token');
+      const token = localStorage.getItem('dravoltsolar_token');
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -32,8 +32,8 @@ api.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('wqsolar_token');
-        localStorage.removeItem('wqsolar_user');
+        localStorage.removeItem('dravoltsolar_token');
+        localStorage.removeItem('dravoltsolar_user');
         // Do not redirect inside the interceptor to prevent loop during login validation, but trigger a clean refresh or let UI handle it.
       }
     }

@@ -128,8 +128,9 @@ export default function FuncionariosPage() {
       setCreateValorDiariaPadrao('');
       setIsCreateOpen(false);
       fetchWorkers();
-    } catch (err) {
-      alert('Erro ao cadastrar instalador.');
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || 'Erro desconhecido';
+      alert(`Erro ao cadastrar instalador: ${msg}`);
     }
   };
 
@@ -147,8 +148,9 @@ export default function FuncionariosPage() {
       });
       setIsEditOpen(false);
       fetchWorkers();
-    } catch (err) {
-      alert('Erro ao atualizar dados do instalador.');
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || 'Erro desconhecido';
+      alert(`Erro ao atualizar dados do instalador: ${msg}`);
     }
   };
 
@@ -159,8 +161,9 @@ export default function FuncionariosPage() {
     try {
       await api.delete(`/api/obras/funcionarios/${workerId}`);
       fetchWorkers();
-    } catch (err) {
-      alert('Erro ao desativar instalador.');
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || 'Erro desconhecido';
+      alert(`Erro ao desativar instalador: ${msg}`);
     }
   };
 

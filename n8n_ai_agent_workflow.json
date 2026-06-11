@@ -17,7 +17,7 @@
       "parameters": {
         "agent": "conversational",
         "promptType": "define",
-        "text": "=Você é o Diretor de Operações e Assistente de IA do ERP da WQ Solar. Seu objetivo é ajudar os sócios Rafael (telefone final 16126) e Wilson a gerenciar a empresa diretamente do grupo de WhatsApp.\n\nRegras Societárias Importantes:\n- Rafael e Wilson dividem os lucros em exatamente 50/50.\n- Quando despesas são pagas do próprio bolso por um sócio (Ex: Rafael pagou Uber R$ 130), isso é um adiantamento. Registre como saída indicando o sócio como pagador.\n- As despesas do bolso devem ser reembolsadas prioritariamente a partir do caixa da obra antes de dividir qualquer lucro líquido.\n\nSua Persona:\n- Seja direto, claro e formate suas respostas com Markdown limpo.\n- Dê alertas de caixa caso perceba desproporção e dê conselhos/sugestões de otimização operacional de campo quando perguntado.\n\nMensagem recebida de {{ $json.body.data.key.participant || $json.body.data.key.remoteJid }}: \"{{ $json.body.data.message.conversation || $json.body.data.message.extendedTextMessage.text }}\"",
+        "text": "=Você é o Diretor de Operações e Assistente de IA do ERP da Dravolt Solar. Seu objetivo é ajudar os sócios Rafael (telefone final 16126) e Wilson a gerenciar a empresa diretamente do grupo de WhatsApp.\n\nRegras Societárias Importantes:\n- Rafael e Wilson dividem os lucros em exatamente 50/50.\n- Quando despesas são pagas do próprio bolso por um sócio (Ex: Rafael pagou Uber R$ 130), isso é um adiantamento. Registre como saída indicando o sócio como pagador.\n- As despesas do bolso devem ser reembolsadas prioritariamente a partir do caixa da obra antes de dividir qualquer lucro líquido.\n\nSua Persona:\n- Seja direto, claro e formate suas respostas com Markdown limpo.\n- Dê alertas de caixa caso perceba desproporção e dê conselhos/sugestões de otimização operacional de campo quando perguntado.\n\nMensagem recebida de {{ $json.body.data.key.participant || $json.body.data.key.remoteJid }}: \"{{ $json.body.data.message.conversation || $json.body.data.message.extendedTextMessage.text }}\"",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -66,7 +66,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"cliente\": \"{{ $parameter.cliente || $parameter.nome }}\",\n  \"valorFechado\": {{ $parameter.valorFechado }}\n}",
+        "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"cliente\": \"{{ $parameter.cliente }}\",\n  \"valorFechado\": {{ $parameter.valorFechado }}\n}",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
@@ -92,7 +92,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n  \"valor\": {{ $parameter.valor }},\n  \"tipo\": \"{{ $parameter.tipo }}\",\n  \"categoriaSaida\": \"{{ $parameter.categoria || 'OUTROS' }}\",\n  \"descricao\": \"{{ $parameter.descricao }}\",\n  \"obraId\": \"{{ $parameter.obraId }}\",\n  \"socioId\": \"{{ $parameter.socioId || null }}\"\n}",
+        "jsonBody": "{\n  \"valor\": {{ $parameter.valor }},\n  \"tipo\": \"{{ $parameter.tipo }}\",\n  \"categoriaSaida\": \"{{ $parameter.categoria }}\",\n  \"descricao\": \"{{ $parameter.descricao }}\",\n  \"obraId\": \"{{ $parameter.obraId }}\",\n  \"socioId\": \"{{ $parameter.socioId }}\"\n}",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
@@ -188,7 +188,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"telefone\": \"{{ $parameter.telefone || null }}\",\n  \"valorDiariaPadrao\": {{ $parameter.valorDiariaPadrao }}\n}",
+        "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"telefone\": \"{{ $parameter.telefone }}\",\n  \"valorDiariaPadrao\": {{ $parameter.valorDiariaPadrao }}\n}",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
@@ -263,7 +263,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"cliente\": \"{{ $parameter.cliente }}\",\n  \"telefone\": \"{{ $parameter.telefone || null }}\",\n  \"valorProposta\": {{ $parameter.valorProposta || 0 }},\n  \"status\": \"{{ $parameter.status || 'NOVO_LEAD' }}\"\n}",
+        "jsonBody": "{\n  \"nome\": \"{{ $parameter.nome }}\",\n  \"cliente\": \"{{ $parameter.cliente }}\",\n  \"telefone\": \"{{ $parameter.telefone }}\",\n  \"valorProposta\": {{ $parameter.valorProposta }},\n  \"status\": \"{{ $parameter.status }}\"\n}",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",

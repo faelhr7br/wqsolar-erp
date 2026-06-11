@@ -14,7 +14,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     // If user is already authenticated, send them to dashboard
-    const token = localStorage.getItem('wqsolar_token');
+    const token = localStorage.getItem('dravoltsolar_token');
     if (token) {
       router.push('/');
     }
@@ -33,8 +33,8 @@ export default function LoginPage() {
 
       const { token, user } = response.data;
       
-      localStorage.setItem('wqsolar_token', token);
-      localStorage.setItem('wqsolar_user', JSON.stringify(user));
+      localStorage.setItem('dravoltsolar_token', token);
+      localStorage.setItem('dravoltsolar_user', JSON.stringify(user));
       
       router.push('/');
     } catch (err: any) {
@@ -63,7 +63,7 @@ export default function LoginPage() {
             <Sun className="h-10 w-10 text-solar-blue animate-pulse" />
           </div>
           <div>
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">WQ Solar</h1>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Dravolt Solar</h1>
             <p className="mt-1 text-sm text-slate-500">ERP Financeiro e Operacional Solar</p>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="rafael@wqsolar.com"
+                placeholder="rafael@dravoltsolar.com"
                 className="premium-input bg-white text-slate-800 border border-slate-200"
               />
             </div>

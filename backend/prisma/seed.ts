@@ -8,27 +8,28 @@ async function main() {
 
   // 1. Create Default Tenant
   const tenant = await prisma.tenant.upsert({
-    where: { slug: 'wq-solar' },
+    where: { slug: 'dravolt-solar' },
     update: {},
     create: {
-      nome: 'WQ Solar',
-      slug: 'wq-solar',
+      nome: 'Dravolt Solar',
+      slug: 'dravolt-solar',
       ativo: true,
     },
   });
   console.log(`Tenant created/found: ${tenant.nome} (${tenant.id})`);
 
-  // 2. Hash Password for partners
-  const passwordHash = await bcrypt.hash('admin123', 10);
+  // 2. Hash Passwords for partners
+  const passwordHashRafael = await bcrypt.hash('admin123', 10);
+  const passwordHashWilson = await bcrypt.hash('wilson123', 10);
 
   // 3. Create Partner: Rafael
   const userRafael = await prisma.user.upsert({
-    where: { email: 'rafael@wqsolar.com' },
+    where: { email: 'rafael@dravoltsolar.com' },
     update: {},
     create: {
-      email: 'rafael@wqsolar.com',
+      email: 'rafael@dravoltsolar.com',
       nome: 'Rafael',
-      senhaHash: passwordHash,
+      senhaHash: passwordHashRafael,
       telefone: '5521959416126', // Rafael's WhatsApp
       role: Role.PARTNER,
       tenantId: tenant.id,
@@ -47,12 +48,12 @@ async function main() {
 
   // 4. Create Partner: Wilson
   const userWilson = await prisma.user.upsert({
-    where: { email: 'wilson@wqsolar.com' },
+    where: { email: 'wilson@dravoltsolar.com' },
     update: {},
     create: {
-      email: 'wilson@wqsolar.com',
+      email: 'wilson@dravoltsolar.com',
       nome: 'Wilson',
-      senhaHash: passwordHash,
+      senhaHash: passwordHashWilson,
       telefone: '5521999999999', // Default placeholder for Wilson
       role: Role.PARTNER,
       tenantId: tenant.id,

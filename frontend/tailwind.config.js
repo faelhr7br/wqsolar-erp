@@ -17,10 +17,10 @@ module.exports = {
           hover: '#f1f5f9'  // Slate-100 hover effect
         },
         solar: {
-          yellow: '#f59e0b',
-          blue: '#0284c7', // Slate blue
+          yellow: '#f97316', // Dravolt Solar Orange
+          blue: '#2563eb',   // Dravolt Solar Blue
           emerald: '#10b981', // Flat emerald green
-          steel: '#0284c7', // Slate blue primary
+          steel: '#2563eb',   // Dravolt Solar Blue primary
           slate: '#64748b'  // Slate-500 text
         }
       },

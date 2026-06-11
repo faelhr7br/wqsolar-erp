@@ -33,8 +33,8 @@ export default function RootLayout({
     setMounted(true);
     
     // Auth validation check
-    const token = localStorage.getItem('wqsolar_token');
-    const storedUser = localStorage.getItem('wqsolar_user');
+    const token = localStorage.getItem('dravoltsolar_token');
+    const storedUser = localStorage.getItem('dravoltsolar_user');
     
     if (!token && pathname !== '/login') {
       router.push('/login');
@@ -44,8 +44,8 @@ export default function RootLayout({
   }, [pathname, router]);
 
   const handleLogout = () => {
-    localStorage.removeItem('wqsolar_token');
-    localStorage.removeItem('wqsolar_user');
+    localStorage.removeItem('dravoltsolar_token');
+    localStorage.removeItem('dravoltsolar_user');
     router.push('/login');
   };
 
@@ -53,7 +53,7 @@ export default function RootLayout({
     return (
       <html lang="pt-BR" className="light">
         <head>
-          <title>WQ Solar - ERP</title>
+          <title>Dravolt Solar - ERP</title>
           <meta name="description" content="Gestão Solar Operacional e Financeira Premium" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -73,7 +73,7 @@ export default function RootLayout({
     return (
       <html lang="pt-BR" className="light">
         <head>
-          <title>WQ Solar - Login</title>
+          <title>Dravolt Solar - Login</title>
           <meta name="description" content="Gestão Solar Operacional e Financeira Premium" />
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         </head>
@@ -95,7 +95,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="light">
       <head>
-        <title>WQ Solar - ERP</title>
+        <title>Dravolt Solar - ERP</title>
         <meta name="description" content="Gestão Solar Operacional e Financeira Premium" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </head>
@@ -111,7 +111,7 @@ export default function RootLayout({
                   <Sun className="h-6 w-6 text-solar-blue animate-pulse" />
                 </div>
                 <div>
-                  <h1 className="font-bold text-lg text-zinc-100 tracking-tight leading-none">WQ Solar</h1>
+                  <h1 className="font-bold text-lg text-zinc-100 tracking-tight leading-none">Dravolt Solar</h1>
                   <span className="text-[10px] text-zinc-500 font-semibold tracking-wider uppercase">ERP OPERACIONAL</span>
                 </div>
               </div>
@@ -172,7 +172,7 @@ export default function RootLayout({
                     <div className="flex items-center gap-3">
                       <Sun className="h-6 w-6 text-solar-blue" />
                       <div>
-                        <h1 className="font-bold text-lg text-zinc-100">WQ Solar</h1>
+                        <h1 className="font-bold text-lg text-zinc-100">Dravolt Solar</h1>
                         <span className="text-[10px] text-zinc-500 font-semibold tracking-wider">ERP</span>
                       </div>
                     </div>
@@ -239,7 +239,7 @@ export default function RootLayout({
             <header className="flex md:hidden items-center justify-between px-6 py-4 border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-40">
               <div className="flex items-center gap-2">
                 <Sun className="h-5 w-5 text-solar-blue animate-pulse" />
-                <span className="font-bold text-sm text-slate-800 tracking-tight">WQ Solar</span>
+                <span className="font-bold text-sm text-slate-800 tracking-tight">Dravolt Solar</span>
               </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(true)}

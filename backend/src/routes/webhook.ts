@@ -114,7 +114,7 @@ export async function webhookRoutes(fastify: FastifyInstance) {
 
           return reply.send({
             status: 'success',
-            responseText: `☀️ *WQ Solar - Nova Obra!*\n\n` +
+            responseText: `☀️ *Dravolt Solar - Nova Obra!*\n\n` +
               `🏗️ Obra: *${newObra.nome}*\n` +
               `💰 Valor Fechado: *R$ ${valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}*\n` +
               `👤 Cadastrado por: *${partnerName}*\n` +
@@ -336,7 +336,7 @@ export async function webhookRoutes(fastify: FastifyInstance) {
 
           return reply.send({
             status: 'success',
-            responseText: `📊 *RESUMO DE OBRA - WQ SOLAR*\n` +
+            responseText: `📊 *RESUMO DE OBRA - DRAVOLT SOLAR*\n` +
               `━━━━━━━━━━━━━━━━━━━━\n` +
               `🏗️ Obra: *${summary.obraNome}*\n` +
               `👤 Cliente: *${summary.cliente}*\n` +
@@ -372,7 +372,7 @@ export async function webhookRoutes(fastify: FastifyInstance) {
             status: 'success',
             responseText: `📊 *RELATÓRIO ${tipo} OPERACIONAL*\n` +
               `━━━━━━━━━━━━━━━━━━━━\n` +
-              `🏢 Empresa: *WQ Solar*\n` +
+              `🏢 Empresa: *Dravolt Solar*\n` +
               `📅 Período: *Geral consolidado*\n` +
               `━━━━━━━━━━━━━━━━━━━━\n` +
               `💰 *Faturamento Total:* R$ ${dashboard.faturamentoMensal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n` +

@@ -191,7 +191,7 @@ export default function CrmPage() {
       </div>
 
       {/* KANBAN BOARD */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 overflow-x-auto pb-4">
+      <div className="flex lg:grid lg:grid-cols-6 gap-4 overflow-x-auto pb-4 w-full">
         {STAGES.map((stage) => {
           const stageLeads = leads.filter(l => l.status === stage.id);
           const totalProposals = stageLeads.reduce((acc, curr) => acc + Number(curr.valorProposta || 0), 0);
@@ -199,7 +199,7 @@ export default function CrmPage() {
           return (
             <div 
               key={stage.id} 
-              className={`flex flex-col min-w-[200px] bg-white rounded-xl border border-slate-200 border-t-4 ${stage.color} p-4 space-y-4 max-h-[70vh] overflow-y-auto shadow-sm`}
+              className={`flex flex-col min-w-[280px] lg:min-w-0 bg-white rounded-xl border border-slate-200 border-t-4 ${stage.color} p-4 space-y-4 max-h-[70vh] overflow-y-auto shadow-sm`}
             >
               
               {/* Column Header */}
